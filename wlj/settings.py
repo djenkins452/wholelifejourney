@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-$%!k3jikbi6*6$(ggvz5dwe^jqghj6v+juyy*wl)7ynxfif^@#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://wholelifejourney-production.up.railway.app/','wholelifejourney-production.up.railway.app']
 
 
 # Application definition
