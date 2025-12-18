@@ -1,7 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
+#def home(request):
+#    return render(request, 'home.html')
+
+
 def home(request):
+#    if request.user.is_authenticated:
+#        return redirect('dashboard')
+#    return render(request, 'home_public.html')
     return render(request, 'home.html')
 
 def login_view(request):
@@ -39,3 +48,7 @@ def utilities_color_view(request):
 
 def utilities_other_view(request):
     return render(request, 'utilities-other.html')
+
+@login_required
+def dashboard_view(request):
+    return render(request, 'dashboard.html')    
