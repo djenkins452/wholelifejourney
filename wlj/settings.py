@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-$%!k3jikbi6*6$(ggvz5dwe^jqghj6v+juyy*wl)7ynxfif^@#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['wholelifejourney.com', 'http://wholelifejourney.com','https://wholelifejourney-production.up.railway.app/','wholelifejourney-production.up.railway.app','localhost']
+ALLOWED_HOSTS = ['wholelifejourney.com', 'www.wholelifejourney.com','https://wholelifejourney-production.up.railway.app/','wholelifejourney-production.up.railway.app','localhost']
 
 
 # Application definition
@@ -121,5 +121,14 @@ CSRF_TRUSTED_ORIGINS = [
     "https://www.wholelifejourney.com",
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://wholelifejourney.com",
+    "https://www.wholelifejourney.com",
+]
+
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
+
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+
