@@ -38,6 +38,11 @@
     .nav a:hover {
       background: rgba(255,255,255,.08);
     }
+    .nav a.active {
+      background: rgba(255,255,255,.18);
+      color: #ffffff;
+      font-weight: 600;
+    }
 
     .content { flex: 1; }
     .topbar {
@@ -65,8 +70,16 @@
 
       <div class="nav">
         <div class="nav-section">Core</div>
-        <a href="{% url 'core:dashboard' %}">Dashboard</a>
-        <a href="{% url 'core:module_settings' %}">Module Settings</a>
+
+        <a href="{% url 'core:dashboard' %}"
+           class="{% if request.path == '/dashboard/' %}active{% endif %}">
+          Dashboard
+        </a>
+
+        <a href="{% url 'core:module_settings' %}"
+           class="{% if request.path == '/settings/modules/' %}active{% endif %}">
+          Module Settings
+        </a>
 
         <div class="nav-section">Enabled Modules</div>
 
@@ -82,4 +95,18 @@
           </div>
         {% endif %}
 
-        <div clas
+        <div class="nav-section">Account</div>
+        <a href="{% url 'logout' %}">Logout</a>
+      </div>
+    </aside>
+
+    <main class="content">
+      <div class="topbar"></div>
+      <div class="page">
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+
+  </div>
+</body>
+</html>
