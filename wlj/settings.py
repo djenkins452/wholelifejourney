@@ -13,7 +13,14 @@ SECRET_KEY = 'django-insecure-9kbu7eeqepsa1kzx4^_1ezlpq4x1v-t&!(aa0tq$y4=0fobe4i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "wholelifejourney.com",
+    "www.wholelifejourney.com",
+]
+
+
 
 
 # Application definition
