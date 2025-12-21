@@ -8,17 +8,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-$%!k3jikbi6*6$(ggvz5dwe^jqghj6v+juyy*wl)7ynxfif^@#'
+SECRET_KEY = 'django-insecure-9kbu7eeqepsa1kzx4^_1ezlpq4x1v-t&!(aa0tq$y4=0fobe4i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = [
-    "wholelifejourney.com",
-    "www.wholelifejourney.com",
-    "wholelifejourney-production.up.railway.app",
-    "localhost",
-]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -30,21 +25,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'website',
-    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
 ]
 
 ROOT_URLCONF = 'wlj.urls'
@@ -52,7 +42,7 @@ ROOT_URLCONF = 'wlj.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "wlj" / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -113,24 +103,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = ['static/']
-
-# Push site online
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFileStorage'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/dashboard/'
-LOGOUT_REDIRECT_URL = '/'
-
-CSRF_TRUSTED_ORIGINS = [
-    "https://wholelifejourney.com",
-    "https://www.wholelifejourney.com",
-]
-
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-
-
