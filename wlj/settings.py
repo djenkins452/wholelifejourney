@@ -13,6 +13,17 @@ SECRET_KEY = 'django-insecure-9kbu7eeqepsa1kzx4^_1ezlpq4x1v-t&!(aa0tq$y4=0fobe4i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Trust reverse proxy (Cloudflare / Railway)
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+# Allow Cloudflare HTTPS POSTs (future-safe)
+CSRF_TRUSTED_ORIGINS = [
+    "https://wholelifejourney.com",
+    "https://www.wholelifejourney.com",
+]
+
+
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
