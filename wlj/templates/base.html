@@ -1,43 +1,85 @@
-<!DOCTYPE html>
+{% load static %}
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Whole Life Journey{% endblock %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>{% block title %}Whole Life Journey{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <style>
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #0f172a;
-            color: #e5e7eb;
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #f6f7f9; }
+    .layout { display: flex; min-height: 100vh; }
 
-        .container {
-            text-align: center;
-            max-width: 640px;
-            padding: 2rem;
-        }
+    .sidebar {
+      width: 260px;
+      background: #111827;
+      color: #fff;
+      padding: 18px 14px;
+    }
+    .brand {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 18px;
+    }
+    .nav-section {
+      margin-top: 16px;
+      font-size: 12px;
+      opacity: .7;
+      text-transform: uppercase;
+    }
+    .nav a {
+      display: block;
+      padding: 10px;
+      margin-top: 4px;
+      border-radius: 8px;
+      color: #e5e7eb;
+      text-decoration: none;
+    }
+    .nav a:hover {
+      background: rgba(255,255,255,.08);
+    }
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
+    .content { flex: 1; }
+    .topbar {
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 12px 18px;
+    }
+    .page { padding: 18px; }
 
-        p {
-            opacity: 0.85;
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-    </style>
+    .card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .muted { color: #6b7280; font-size: 13px; }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        {% block content %}{% endblock %}
-    </div>
-</body>
-</html>
+  <div class="layout">
+
+    <aside class="sidebar">
+      <div class="brand">Whole Life Journey</div>
+
+      <div class="nav">
+        <div class="nav-section">Core</div>
+        <a href="{% url 'core:dashboard' %}">Dashboard</a>
+        <a href="{% url 'core:module_settings' %}">Module Settings</a>
+
+        <div class="nav-section">Enabled Modules</div>
+
+        {% if enabled_modules %}
+          {% for module in enabled_modules %}
+            <a href="#">
+              {{ module.name }}
+            </a>
+          {% endfor %}
+        {% else %}
+          <div class="muted" style="padding: 6px 10px;">
+            No modules enabled
+          </div>
+        {% endif %}
+
+        <div clas
