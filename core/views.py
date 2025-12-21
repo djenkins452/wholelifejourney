@@ -8,7 +8,13 @@ from .models import Module, UserModule
 
 @login_required
 def dashboard(request):
-    modules = Module.objects.filter(is_active_globally=True).order_by("sort_order", "name")
+    """
+    Main dashboard showing enabled and disabled modules for the user.
+    """
+    modules = Module.objects.filter(
+        is_active_globally=True
+    ).order_by("sort_order", "name")
+
     enabled_map = {
         um.module_id: um.is_enabled
         for um in UserModule.objects.filter(user=request.user)
@@ -29,38 +35,52 @@ def dashboard(request):
 
 @login_required
 def module_settings(request):
-    modules = Module.objects.filter(is_active_globally=True).order_by("sort_order", "name")
+    """
+    Enable / disable modules per user.
+    """
+    modules = Module.objects.filter(
+        is_active_globally=True
+    ).order_by("sort_order", "name")
 
-    # Ensure a UserModule row exists for each module for this user
-    existing = {um.module_id: um for um in UserModule.objects.filter(user=request.user)}
+    # Existing UserModule rows for this user
+    existing = {
+        um.module_id: um
+        for um in UserModule.objects.filter(user=request.user)
+    }
 
     if request.method == "POST":
-        posted_keys = set(request.POST.getlist("modules"))  # list of module keys checked
+        posted_keys = set(request.POST.getlist("modules"))
 
         with transaction.atomic():
-            for m in modules:
-                um = existing.get(m.id)
-                if um is None:
-                    um = UserModule.objects.create(user=request.user, module=m, is_enabled=False)
+            for module in modules:
+                um = existing.get(module.id)
 
-                should_enable = (m.key in posted_keys)
+                if um is None:
+                    um = UserModule.objects.create(
+                        user=request.user,
+                        module=module,
+                        is_enabled=False,
+                    )
+
+                should_enable = module.key in posted_keys
 
                 if should_enable and not um.is_enabled:
                     um.is_enabled = True
                     um.enabled_at = timezone.now()
                     um.save(update_fields=["is_enabled", "enabled_at"])
-                elif (not should_enable) and um.is_enabled:
+
+                elif not should_enable and um.is_enabled:
                     um.is_enabled = False
                     um.save(update_fields=["is_enabled"])
 
         return redirect("core:dashboard")
 
-    # GET
-    enabled_keys = set()
-    for m in modules:
-        um = existing.get(m.id)
-        if um and um.is_enabled:
-            enabled_keys.add(m.key)
+    # GET request
+    enabled_keys = {
+        module.key
+        for module in modules
+        if existing.get(module.id) and existing[module.id].is_enabled
+    }
 
     return render(
         request,
