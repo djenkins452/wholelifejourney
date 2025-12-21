@@ -2,8 +2,10 @@ from .base import *
 
 DEBUG = True
 
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+
 STATICFILES_DIRS = [
-    BASE_DIR / "wlj" / "static",
+    BASE_DIR / "wlj" / "static"
 ]
 
 SECURE_SSL_REDIRECT = False
