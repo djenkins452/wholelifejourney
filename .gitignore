@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+virt/
+
+# Django
+db.sqlite3
+.env
+.env.*
+staticfiles/
+
+# Static vendor assets (never commit these)
+static/vendor/
+
+# OS
+.DS_Store
+Thumbs.db
