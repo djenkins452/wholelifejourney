@@ -1,59 +1,12 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
+{% extends "base.html" %}
 
-  <header>
+{% block title %}Dashboard | Whole Life Journey{% endblock %}
+
+{% block content %}
+  <div class="card">
     <h1>Dashboard</h1>
-    <nav>
-      <a href="{% url 'core:module_settings' %}">Manage Modules</a> |
-      <a href="{% url 'logout' %}">Logout</a>
-    </nav>
-    <hr>
-  </header>
-
-  <main>
-
-    <section>
-      <h2>Enabled Modules</h2>
-
-      {% if enabled_modules %}
-        <ul>
-          {% for module in enabled_modules %}
-            <li>
-              <strong>{{ module.name }}</strong>
-              {% if module.description %}
-                — {{ module.description }}
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p>No modules enabled yet.</p>
-      {% endif %}
-    </section>
-
-    <hr>
-
-    <section>
-      <h2>Disabled Modules</h2>
-
-      {% if disabled_modules %}
-        <ul>
-          {% for module in disabled_modules %}
-            <li>{{ module.name }}</li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p>All modules are enabled.</p>
-      {% endif %}
-    </section>
-
-  </main>
-
-</body>
-</html>
+    <p class="muted">
+      Shared layout is active. Navigation will become user-aware next.
+    </p>
+  </div>
+{% endblock %}
