@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Journal | Whole Life Journey{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <h1>Journal</h1>
+
+    {% if entries %}
+      {% for entry in entries %}
+        <div style="margin-bottom: 16px;">
+          <div class="muted">
+            {{ entry.created_at|date:"F j, Y — g:i A" }}
+          </div>
+          <p style="margin-top: 6px; white-space: pre-wrap;">
+            {{ entry.body }}
+          </p>
+        </div>
+        <hr>
+      {% endfor %}
+    {% else %}
+      <p class="muted">No journal entries yet.</p>
+    {% endif %}
+  </div>
+{% endblock %}
