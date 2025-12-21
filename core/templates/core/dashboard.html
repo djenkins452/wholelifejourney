@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Dashboard</title>
+</head>
+<body>
+  <h1>Dashboard</h1>
+
+  <p><a href="/settings/modules/">Manage Modules</a></p>
+
+  <h2>Enabled Modules</h2>
+  {% if enabled_modules %}
+    <ul>
+      {% for m in enabled_modules %}
+        <li><strong>{{ m.name }}</strong> — {{ m.description }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No modules enabled yet.</p>
+  {% endif %}
+
+  <h2>Disabled Modules</h2>
+  {% if disabled_modules %}
+    <ul>
+      {% for m in disabled_modules %}
+        <li>{{ m.name }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Everything is enabled.</p>
+  {% endif %}
+</body>
+</html>
