@@ -1,34 +1,59 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-  <h1>Dashboard</h1>
 
-  <p><a href="/settings/modules/">Manage Modules</a></p>
+  <header>
+    <h1>Dashboard</h1>
+    <nav>
+      <a href="{% url 'core:module_settings' %}">Manage Modules</a> |
+      <a href="{% url 'logout' %}">Logout</a>
+    </nav>
+    <hr>
+  </header>
 
-  <h2>Enabled Modules</h2>
-  {% if enabled_modules %}
-    <ul>
-      {% for m in enabled_modules %}
-        <li><strong>{{ m.name }}</strong> — {{ m.description }}</li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>No modules enabled yet.</p>
-  {% endif %}
+  <main>
 
-  <h2>Disabled Modules</h2>
-  {% if disabled_modules %}
-    <ul>
-      {% for m in disabled_modules %}
-        <li>{{ m.name }}</li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>Everything is enabled.</p>
-  {% endif %}
+    <section>
+      <h2>Enabled Modules</h2>
+
+      {% if enabled_modules %}
+        <ul>
+          {% for module in enabled_modules %}
+            <li>
+              <strong>{{ module.name }}</strong>
+              {% if module.description %}
+                — {{ module.description }}
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No modules enabled yet.</p>
+      {% endif %}
+    </section>
+
+    <hr>
+
+    <section>
+      <h2>Disabled Modules</h2>
+
+      {% if disabled_modules %}
+        <ul>
+          {% for module in disabled_modules %}
+            <li>{{ module.name }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>All modules are enabled.</p>
+      {% endif %}
+    </section>
+
+  </main>
+
 </body>
 </html>
