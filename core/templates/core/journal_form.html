@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}New Journal Entry | Whole Life Journey{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <h1>New Journal Entry</h1>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <div style="margin-top: 12px;">
+        <button type="submit">Save Entry</button>
+        <a href="{% url 'core:journal_list' %}" style="margin-left: 10px;">
+          Cancel
+        </a>
+      </div>
+    </form>
+  </div>
+{% endblock %}

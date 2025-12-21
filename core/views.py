@@ -2,9 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.shortcuts import render, redirect
 from django.utils import timezone
-
-from .models import Module, UserModule
-
+from .models import Module, UserModule, JournalEntry
+from .forms import JournalEntryForm
 
 @login_required
 def dashboard(request):
@@ -89,4 +88,36 @@ def module_settings(request):
             "modules": modules,
             "enabled_keys": enabled_keys,
         },
+    )
+
+
+@login_required
+def journal_list(request):
+    entries = JournalEntry.objects.filter(
+        user=request.user
+    ).order_by("-created_at")
+
+    return render(
+        request,
+        "core/journal_list.html",
+        {"entries": entries}
+    )
+
+
+@login_required
+def journal_create(request):
+    if request.method == "POST":
+        form = JournalEntryForm(request.POST)
+        if form.is_valid():
+            entry = form.save(commit=False)
+            entry.user = request.user
+            entry.save()
+            return redirect("core:journal_list")
+    else:
+        form = JournalEntryForm()
+
+    return render(
+        request,
+        "core/journal_form.html",
+        {"form": form}
     )
