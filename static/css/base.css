@@ -1,0 +1,211 @@
+/* ======================================================
+   Whole Life Journey — Base Styles (LOCKED)
+   ====================================================== */
+
+/* ----------------------------------------
+   Global Reset
+---------------------------------------- */
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* ----------------------------------------
+   Page Title / Counts
+---------------------------------------- */
+
+.page-title {
+  margin-bottom: 0.5rem;
+}
+
+.count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 999px;
+  font-size: 12px;
+  margin-left: 6px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.count-badge.subtle {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* ----------------------------------------
+   Journal Header
+---------------------------------------- */
+
+.journal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.journal-controls {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.journal-trash-link,
+.journal-back-link {
+  font-size: 14px;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+/* ----------------------------------------
+   Journal Form
+---------------------------------------- */
+
+.journal-form-card {
+  margin-bottom: 16px;
+}
+
+.form-row {
+  margin-bottom: 10px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.cancel-link {
+  font-size: 14px;
+  text-decoration: none;
+}
+
+/* ----------------------------------------
+   Expand / Collapse
+---------------------------------------- */
+
+.expand-all {
+  margin: 6px 0 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #2563eb;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.expand-all img {
+  width: 16px;
+  height: 16px;
+}
+
+/* ----------------------------------------
+   Journal Entries
+---------------------------------------- */
+
+.journal-entry {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 12px 0;
+}
+
+.entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.entry-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.entry-preview {
+  margin-top: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #374151;
+}
+
+.entry-toggle {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.25);
+  padding: 4px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.entry-toggle img {
+  width: 16px;
+  height: 16px;
+}
+
+.entry-body {
+  display: none;
+  margin-top: 10px;
+}
+
+.entry-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin-bottom: 10px;
+  color: #111827;
+}
+
+/* ----------------------------------------
+   Entry Actions (STABILIZED)
+---------------------------------------- */
+
+.entry-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.entry-action {
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Edit */
+.entry-action-edit {
+  color: #2563eb;
+}
+
+/* Hide */
+.entry-action-hide {
+  color: #6b7280;
+}
+
+/* Delete (danger) */
+.entry-action-delete {
+  color: #b91c1c;
+}
+
+.entry-action-delete:hover {
+  background: rgba(185, 28, 28, 0.08);
+}
+
+/* ----------------------------------------
+   Utility
+---------------------------------------- */
+
+.muted {
+  color: #6b7280;
+  font-size: 14px;
+}
