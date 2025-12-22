@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Trash | Journal{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <h1>Recently Deleted</h1>
+
+    {% if entries %}
+      {% for entry in entries %}
+        <div style="margin-bottom:16px;">
+          <div class="muted">
+            Deleted {{ entry.deleted_at|date:"F j, Y — g:i A" }}
+          </div>
+
+          <p style="white-space: pre-wrap;">
+            {{ entry.body }}
+          </p>
+
+          <form method="post"
+                action="{% url 'core:journal_restore' %}"
+                style="display:inline;">
+            {% csrf_token %}
+            <input type="hidden" name="entry_id" value="{{ entry.id }}">
+            <button type="submit">Restore</button>
+          </form>
+
+          <form method="post"
+                action="{% url 'core:journal_hard_delete' entry.id %}"
+                style="display:inline;"
+                onsubmit="return confirm('Permanently delete this entry?');">
+            {% csrf_token %}
+            <button type="submit">Delete Permanently</button>
+          </form>
+        </div>
+        <hr>
+      {% endfor %}
+    {% else %}
+      <p class="muted">Trash is empty.</p>
+    {% endif %}
+  </div>
+{% endblock %}

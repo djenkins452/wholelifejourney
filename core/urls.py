@@ -9,5 +9,7 @@ urlpatterns = [
     path("journal/", views.journal_list, name="journal_list"),
     path("journal/new/", views.journal_create, name="journal_create"),
     path("journal/delete/<int:entry_id>/", views.journal_delete, name="journal_delete"),
-
+    path("journal/undo/", views.journal_restore, name="journal_restore"),
+    path("journal/trash/", views.journal_trash, name="journal_trash"),
+    path("journal/hard-delete/<int:entry_id>/", views.journal_hard_delete, name="journal_hard_delete"),
 ]

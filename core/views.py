@@ -136,7 +136,52 @@ def journal_delete(request, entry_id):
     entry = get_object_or_404(
         JournalEntry,
         id=entry_id,
-        user=request.user
+        user=request.user,
+        deleted_at__isnull=True
+    )
+    entry.soft_delete()
+
+    # store last deleted entry for undo
+    request.session["last_deleted_journal_id"] = entry.id
+
+    return redirect("core:journal_list")
+
+@login_required
+@require_POST
+def journal_restore(request):
+    entry_id = request.session.pop("last_deleted_journal_id", None)
+
+    if entry_id:
+        entry = get_object_or_404(
+            JournalEntry,
+            id=entry_id,
+            user=request.user,
+            deleted_at__isnull=False
+        )
+        entry.restore()
+
+    return redirect("core:journal_list")
+
+@login_required
+def journal_trash(request):
+    entries = JournalEntry.objects.filter(
+        user=request.user,
+        deleted_at__isnull=False
+    ).order_by("-deleted_at")
+
+    return render(request, "core/journal_trash.html", {
+        "entries": entries
+    })
+
+@login_required
+@require_POST
+def journal_hard_delete(request, entry_id):
+    entry = get_object_or_404(
+        JournalEntry,
+        id=entry_id,
+        user=request.user,
+        deleted_at__isnull=False
     )
     entry.delete()
-    return redirect("core:journal_list")
+    return redirect("core:journal_trash")
+

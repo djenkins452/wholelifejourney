@@ -5,6 +5,17 @@
 {% block content %}
   <div class="card">
     <h1>Journal</h1>
+    {% if request.session.last_deleted_journal_id %}
+      <div class="card" style="background:#fef3c7; margin-bottom:12px;">
+        Entry deleted.
+        <form method="post"
+              action="{% url 'core:journal_restore' %}"
+              style="display:inline;">
+          {% csrf_token %}
+          <button type="submit">Undo</button>
+        </form>
+      </div>
+    {% endif %}
 
     {% if entries %}
       {% for entry in entries %}
