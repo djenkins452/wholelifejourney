@@ -69,17 +69,22 @@
       <div class="brand">Whole Life Journey</div>
 
       <div class="nav">
-        <div class="nav-section">Core</div>
+      <div class="nav-section">Core</div>
 
-        <a href="{% url 'core:dashboard' %}"
-           class="{% if request.path == '/dashboard/' %}active{% endif %}">
-          Dashboard
-        </a>
+      <a href="{% url 'core:dashboard' %}"
+         class="{% if request.path == '/dashboard/' %}active{% endif %}">
+        Dashboard
+      </a>
 
-        <a href="{% url 'core:module_settings' %}"
-           class="{% if request.path == '/settings/modules/' %}active{% endif %}">
-          Module Settings
-        </a>
+      <a href="{% url 'core:journal_list' %}"
+         class="{% if request.path|slice:":9" == '/journal/' %}active{% endif %}">
+        Journal
+      </a>
+
+      <a href="{% url 'core:module_settings' %}"
+         class="{% if request.path == '/settings/modules/' %}active{% endif %}">
+        Module Settings
+      </a>
 
         <div class="nav-section">Enabled Modules</div>
 
