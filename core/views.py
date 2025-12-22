@@ -5,6 +5,7 @@ from django.utils import timezone
 from .models import Module, UserModule, JournalEntry
 from .forms import JournalEntryForm
 from django.views.decorators.http import require_POST
+from django.contrib import messages
 
 
 
@@ -151,14 +152,32 @@ def journal_delete(request, entry_id):
 def journal_restore(request):
     entry_id = request.session.pop("last_deleted_journal_id", None)
 
-    if entry_id:
-        entry = get_object_or_404(
-            JournalEntry,
+    if not entry_id:
+        messages.info(
+            request,
+            "There is no journal entry to restore."
+        )
+        return redirect("core:journal_list")
+
+    try:
+        entry = JournalEntry.objects.get(
             id=entry_id,
             user=request.user,
             deleted_at__isnull=False
         )
-        entry.restore()
+    except JournalEntry.DoesNotExist:
+        messages.warning(
+            request,
+            "That journal entry can no longer be restored."
+        )
+        return redirect("core:journal_list")
+
+    entry.restore()
+
+    messages.success(
+        request,
+        "Journal entry restored."
+    )
 
     return redirect("core:journal_list")
 

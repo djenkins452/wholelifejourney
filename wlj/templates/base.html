@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <title>{% block title %}Whole Life Journey{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
   <style>
     body { margin: 0; font-family: Arial, sans-serif; background: #f6f7f9; }
@@ -76,15 +77,18 @@
         Dashboard
       </a>
 
+  
       <a href="{% url 'core:journal_list' %}"
-         class="{% if request.path|slice:":9" == '/journal/' %}active{% endif %}">
+         class="{% if request.path|slice:':9' == '/journal/' %}active{% endif %}">
         Journal
       </a>
 
+      
       <a href="{% url 'core:module_settings' %}"
          class="{% if request.path == '/settings/modules/' %}active{% endif %}">
         Module Settings
       </a>
+
 
         <div class="nav-section">Enabled Modules</div>
 
