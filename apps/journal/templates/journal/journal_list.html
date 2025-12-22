@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Journal | Whole Life Journey{% endblock %}
+
+{% block content %}
+<div class="card">
+  <h1>Journal</h1>
+
+  <div style="margin-bottom: 12px;">
+    <a href="{% url 'journal:create' %}">+ New Entry</a>
+  </div>
+
+  {% if entries %}
+    <ul style="list-style: none; padding-left: 0;">
+      {% for entry in entries %}
+        <li style="margin-bottom: 16px;">
+          <details>
+            <summary>
+              {{ entry.created_at|date:"D, M j – g:i A" }}
+            </summary>
+
+            <div style="margin-top: 8px;">
+              <p style="white-space: pre-wrap;">
+                {{ entry.body }}
+              </p>
+
+              <form method="post"
+                    action="{% url 'journal:delete' entry.id %}">
+                {% csrf_token %}
+                <button type="submit">Archive</button>
+              </form>
+            </div>
+          </details>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No journal entries yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

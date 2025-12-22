@@ -2,8 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from .models import Module, UserModule, JournalEntry
-from .forms import JournalEntryForm
+from .models import Module, UserModule
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 
@@ -95,112 +94,4 @@ def module_settings(request):
             "enabled_keys": enabled_keys,
         },
     )
-
-
-@login_required
-def journal_list(request):
-    entries = JournalEntry.objects.filter(
-        user=request.user
-    ).order_by("-created_at")
-
-    return render(
-        request,
-        "core/journal_list.html",
-        {"entries": entries}
-    )
-
-
-@login_required
-def journal_create(request):
-    if request.method == "POST":
-        form = JournalEntryForm(request.POST)
-        if form.is_valid():
-            entry = form.save(commit=False)
-            entry.user = request.user
-            entry.save()
-            return redirect("core:journal_list")
-    else:
-        form = JournalEntryForm()
-
-    return render(
-        request,
-        "core/journal_form.html",
-        {"form": form}
-    )
-
-
-
-
-@login_required
-@require_POST
-def journal_delete(request, entry_id):
-    entry = get_object_or_404(
-        JournalEntry,
-        id=entry_id,
-        user=request.user,
-        deleted_at__isnull=True
-    )
-    entry.soft_delete()
-
-    # store last deleted entry for undo
-    request.session["last_deleted_journal_id"] = entry.id
-
-    return redirect("core:journal_list")
-
-@login_required
-@require_POST
-def journal_restore(request):
-    entry_id = request.session.pop("last_deleted_journal_id", None)
-
-    if not entry_id:
-        messages.info(
-            request,
-            "There is no journal entry to restore."
-        )
-        return redirect("core:journal_list")
-
-    try:
-        entry = JournalEntry.objects.get(
-            id=entry_id,
-            user=request.user,
-            deleted_at__isnull=False
-        )
-    except JournalEntry.DoesNotExist:
-        messages.warning(
-            request,
-            "That journal entry can no longer be restored."
-        )
-        return redirect("core:journal_list")
-
-    entry.restore()
-
-    messages.success(
-        request,
-        "Journal entry restored."
-    )
-
-    return redirect("core:journal_list")
-
-@login_required
-def journal_trash(request):
-    entries = JournalEntry.objects.filter(
-        user=request.user,
-        deleted_at__isnull=False
-    ).order_by("-deleted_at")
-
-    return render(request, "core/journal_trash.html", {
-        "entries": entries
-    })
-
-@login_required
-@require_POST
-def journal_hard_delete(request, entry_id):
-    entry = get_object_or_404(
-        JournalEntry,
-        id=entry_id,
-        user=request.user,
-        deleted_at__isnull=False
-    )
-    entry.delete()
-    return redirect("core:journal_trash")
 
