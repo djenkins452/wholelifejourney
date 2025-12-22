@@ -2,13 +2,16 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from .models import Module, UserModule
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 
+from .models import Module, UserModule
+from .forms import ProfileForm
 
 
-
+# --------------------------------------------------
+# Dashboard
+# --------------------------------------------------
 
 @login_required
 def dashboard(request):
@@ -36,6 +39,10 @@ def dashboard(request):
         },
     )
 
+
+# --------------------------------------------------
+# Module Settings
+# --------------------------------------------------
 
 @login_required
 def module_settings(request):
@@ -95,3 +102,30 @@ def module_settings(request):
         },
     )
 
+# --------------------------------------------------
+# Profile (Modal Content)
+# --------------------------------------------------
+
+@login_required
+def profile_view(request):
+    """
+    Profile modal content: user preferences (Phase C1 = timezone only)
+    """
+    profile = request.user.profile
+
+    if request.method == "POST":
+        form = ProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Profile updated.")
+            # IMPORTANT: no redirect for modal-based UX
+    else:
+        form = ProfileForm(instance=profile)
+
+    return render(
+        request,
+        "core/profile_profile.html",
+        {
+            "form": form,
+        },
+    )

@@ -1,16 +1,53 @@
-from .models import UserModule
+from .models import Module, UserModule, UserProfile
+from .forms import ProfileForm
+
 
 def enabled_modules(request):
-    if not request.user.is_authenticated:
-        return {"enabled_modules": []}
+    """
+    Global context for:
+    - enabled modules (sidebar)
+    - profile modal (timezone + modules)
 
-    modules = (
+    MUST be defensive: context processors run on every request.
+    """
+    if not request.user.is_authenticated:
+        return {
+            "enabled_modules": [],
+            "modules": [],
+            "enabled_keys": set(),
+            "profile_form": None,
+        }
+
+    # 🔒 GUARANTEE PROFILE EXISTS (critical)
+    profile, _ = UserProfile.objects.get_or_create(
+        user=request.user,
+        defaults={"timezone": "UTC"},
+    )
+
+    # Enabled modules (sidebar)
+    user_modules = (
         UserModule.objects
         .select_related("module")
         .filter(user=request.user, is_enabled=True)
         .order_by("module__name")
     )
 
+    enabled_modules = [um.module for um in user_modules]
+
+    # All globally available modules (profile modal)
+    all_modules = (
+        Module.objects
+        .filter(is_active_globally=True)
+        .order_by("sort_order", "name")
+    )
+
+    enabled_keys = {um.module.key for um in user_modules}
+
+    profile_form = ProfileForm(instance=profile)
+
     return {
-        "enabled_modules": [um.module for um in modules]
+        "enabled_modules": enabled_modules,
+        "modules": all_modules,
+        "enabled_keys": enabled_keys,
+        "profile_form": profile_form,
     }

@@ -1,0 +1,18 @@
+<h2>Profile</h2>
+
+<form id="profile-form" method="post">
+  {% csrf_token %}
+
+  <div style="margin-bottom: 12px;">
+    {{ profile_form.timezone.label_tag }}<br>
+    {{ profile_form.timezone }}
+  </div>
+
+  <button type="submit">Save</button>
+</form>
+
+<div id="profile-save-message"
+     class="muted"
+     style="margin-top:10px; display:none;">
+  Profile saved.
+</div>

@@ -1,0 +1,28 @@
+<h2>Modules</h2>
+
+<form id="profile-modules-form"
+      method="post"
+      action="{% url 'core:module_settings' %}">
+  {% csrf_token %}
+
+  {% for module in modules %}
+    <label style="display:block; margin-bottom:8px;">
+      <input
+        type="checkbox"
+        name="modules"
+        value="{{ module.key }}"
+        {% if module.key in enabled_keys %}checked{% endif %}
+      >
+      {{ module.name }}
+    </label>
+  {% endfor %}
+
+  <br>
+  <button type="submit">Save Modules</button>
+</form>
+
+<div id="modules-save-message"
+     class="muted"
+     style="margin-top:10px; display:none;">
+  Modules saved.
+</div>

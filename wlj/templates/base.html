@@ -5,8 +5,11 @@
   <meta charset="utf-8">
   <title>{% block title %}Whole Life Journey{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <script src="{% static 'js/profile.js' %}" defer></script>
+
+  <!-- RESTORED ORIGINAL LAYOUT STYLES -->
   <style>
     body { margin: 0; font-family: Arial, sans-serif; background: #f6f7f9; }
     .layout { display: flex; min-height: 100vh; }
@@ -50,6 +53,9 @@
       background: #fff;
       border-bottom: 1px solid #e5e7eb;
       padding: 12px 18px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
     }
     .page { padding: 18px; }
 
@@ -64,55 +70,51 @@
 </head>
 
 <body>
-  <div class="layout">
+<div class="layout">
 
-    <aside class="sidebar">
-      <div class="brand">Whole Life Journey</div>
+  <aside class="sidebar">
+    <div class="brand">Whole Life Journey</div>
 
-      <div class="nav">
-        <div class="nav-section">Core</div>
+    <div class="nav">
+      <div class="nav-section">Core</div>
 
-        <a href="{% url 'core:dashboard' %}"
-           class="{% if request.path == '/dashboard/' %}active{% endif %}">
-          Dashboard
-        </a>
+      <a href="{% url 'core:dashboard' %}"
+         class="{% if request.path == '/dashboard/' %}active{% endif %}">
+        Dashboard
+      </a>
 
-        <a href="{% url 'journal:list' %}"
-           class="{% if request.path|slice:':9' == '/journal/' %}active{% endif %}">
-          Journal
-        </a>
+      <a href="{% url 'journal:list' %}"
+         class="{% if request.path|slice:':9' == '/journal/' %}active{% endif %}">
+        Journal
+      </a>
 
-        <a href="{% url 'core:module_settings' %}"
-           class="{% if request.path == '/settings/modules/' %}active{% endif %}">
-          Module Settings
-        </a>
+      <div class="nav-section">Account</div>
+      <a href="{% url 'logout' %}">Logout</a>
+    </div>
+  </aside>
 
-        <div class="nav-section">Enabled Modules</div>
-
-        {% if enabled_modules %}
-          {% for module in enabled_modules %}
-            <a href="#">
-              {{ module.name }}
-            </a>
-          {% endfor %}
-        {% else %}
-          <div class="muted" style="padding: 6px 10px;">
-            No modules enabled
-          </div>
-        {% endif %}
-
-        <div class="nav-section">Account</div>
-        <a href="{% url 'logout' %}">Logout</a>
+  <main class="content">
+    <div class="topbar">
+      <!-- CSS-ONLY AVATAR (NO IMAGE DEPENDENCY) -->
+      <div class="avatar-button" onclick="openProfileModal()" title="Profile">
+        👤
       </div>
-    </aside>
+    </div>
 
-    <main class="content">
-      <div class="topbar"></div>
-      <div class="page">
-        {% block content %}{% endblock %}
-      </div>
-    </main>
+    <div class="page">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+</div>
 
+<!-- PROFILE MODAL -->
+<div id="profileModal" class="profile-modal hidden">
+  <div class="profile-modal-backdrop" onclick="closeProfileModal()"></div>
+  <div class="profile-modal-content">
+    <button class="profile-close" onclick="closeProfileModal()">×</button>
+    {% include "core/profile_modal.html" %}
   </div>
+</div>
+
 </body>
 </html>
