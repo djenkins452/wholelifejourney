@@ -1,41 +1,124 @@
 {% extends "base.html" %}
-
-{% block title %}Journal | Whole Life Journey{% endblock %}
+{% load static %}
+{% block title %}Journal{% endblock %}
 
 {% block content %}
-<div class="card">
-  <h1>Journal</h1>
 
-  <div style="margin-bottom: 12px;">
-    <a href="{% url 'journal:create' %}">+ New Entry</a>
+<div class="journal-header">
+  <h2 class="page-title">
+    Journal
+    <span class="count-badge">{{ entries|length }}</span>
+  </h2>
+
+  <div class="journal-controls">
+    <a href="{% url 'journal:create' %}" class="journal-back-link">
+      + New Entry
+    </a>
+
+    <a href="{% url 'journal:trash' %}" class="journal-trash-link">
+      Hidden
+      <span class="count-badge subtle">{{ hidden_count }}</span>
+    </a>
   </div>
-
-  {% if entries %}
-    <ul style="list-style: none; padding-left: 0;">
-      {% for entry in entries %}
-        <li style="margin-bottom: 16px;">
-          <details>
-            <summary>
-              {{ entry.created_at|date:"D, M j – g:i A" }}
-            </summary>
-
-            <div style="margin-top: 8px;">
-              <p style="white-space: pre-wrap;">
-                {{ entry.body }}
-              </p>
-
-              <form method="post"
-                    action="{% url 'journal:delete' entry.id %}">
-                {% csrf_token %}
-                <button type="submit">Archive</button>
-              </form>
-            </div>
-          </details>
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>No journal entries yet.</p>
-  {% endif %}
 </div>
+
+{% if show_form %}
+  <div class="card journal-form-card">
+    <form method="post">
+      {% csrf_token %}
+
+      {{ form.non_field_errors }}
+
+      <div class="form-row">
+        {{ form.entry_date.label_tag }}
+        {{ form.entry_date }}
+      </div>
+
+      <div class="form-row">
+        {{ form.title.label_tag }}
+        {{ form.title }}
+      </div>
+
+      <div class="form-row">
+        {{ form.body.label_tag }}
+        {{ form.body }}
+      </div>
+
+      <div class="form-actions">
+        <button type="submit">
+          {% if editing %}Update{% else %}Save{% endif %}
+        </button>
+
+        {% if editing %}
+          <a href="{% url 'journal:list' %}" class="cancel-link">Cancel</a>
+        {% endif %}
+      </div>
+    </form>
+  </div>
+{% endif %}
+
+<button class="expand-all" onclick="toggleAll()" id="toggleAllBtn" type="button">
+  <img src="{% static 'icons/arrow-right.svg' %}" id="toggleAllIcon" alt="">
+  <span id="toggleAllText">Expand all</span>
+</button>
+
+<div class="card">
+
+{% if entries %}
+  {% for entry in entries %}
+    <div class="journal-entry">
+
+      <!-- HEADER -->
+      <div class="entry-header">
+        <div class="entry-left">
+          <strong>{{ entry.title }}</strong>
+          <div class="entry-preview preview" id="preview-{{ entry.id }}">
+            {{ entry.body }}
+          </div>
+        </div>
+
+        <button class="entry-toggle"
+                onclick="toggleEntry('{{ entry.id }}', this)"
+                type="button">
+          <img src="{% static 'icons/arrow-right.svg' %}" alt="">
+        </button>
+      </div>
+
+      <!-- BODY -->
+      <div class="entry-body" id="entry-{{ entry.id }}">
+        <div class="entry-text">
+          {{ entry.body }}
+        </div>
+
+        <div class="entry-actions">
+          <a href="{% url 'journal:edit' entry.id %}"
+             class="entry-action entry-action-edit">
+            Edit
+          </a>
+
+          <button type="button"
+                  class="entry-action entry-action-hide"
+                  onclick="submitDelete('hide', '{{ entry.id }}')">
+            Hide
+          </button>
+
+          <button type="button"
+                  class="entry-action entry-action-delete"
+                  onclick="submitDelete('delete', '{{ entry.id }}')">
+            Delete
+          </button>
+        </div>
+      </div>
+
+    </div>
+  {% endfor %}
+{% else %}
+  <p class="muted">No journal entries found.</p>
+{% endif %}
+
+</div>
+
+{% csrf_token %}
+<script src="{% static 'js/journal.js' %}"></script>
+
 {% endblock %}

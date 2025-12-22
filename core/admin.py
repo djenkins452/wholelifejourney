@@ -1,1 +1,2 @@
-from django.contrib import admin
+# core/admin.py
+# Core does not register Journal models

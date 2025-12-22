@@ -3,6 +3,28 @@ from django.db import models
 from django.utils import timezone
 
 
+class UserProfile(models.Model):
+    """
+    One profile per user for global preferences
+    """
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="profile"
+    )
+
+    timezone = models.CharField(
+        max_length=50,
+        default="UTC",
+        help_text="IANA time zone, e.g. America/New_York"
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Profile for {self.user}"
+
 
 class Module(models.Model):
     """
@@ -35,4 +57,3 @@ class UserModule(models.Model):
 
     def __str__(self):
         return f"{self.user} → {self.module.key}: {self.is_enabled}"
-

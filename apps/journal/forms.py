@@ -3,12 +3,33 @@ from .models import JournalEntry
 
 
 class JournalEntryForm(forms.ModelForm):
+    entry_date = forms.DateTimeField(
+        widget=forms.DateTimeInput(
+            attrs={
+                "type": "datetime-local"
+            }
+        ),
+        label="Entry Date"
+    )
+
     class Meta:
         model = JournalEntry
-        fields = ["body"]
+        fields = ["title", "entry_date", "body"]
+        labels = {
+            "title": "",   # 👈 remove label so placeholder acts as label
+        }
         widgets = {
-            "body": forms.Textarea(attrs={
-                "rows": 10,
-                "placeholder": "Write your thoughts here..."
-            })
+            "title": forms.TextInput(
+                attrs={
+                    "placeholder": "Enter Title Here",
+                    "style": "width: 100%;",
+                }
+            ),
+            "body": forms.Textarea(
+                attrs={
+                    "placeholder": "Start Your Journal Entry Here",
+                    "style": "width: 100%;",
+                    "rows": 8,
+                }
+            ),
         }

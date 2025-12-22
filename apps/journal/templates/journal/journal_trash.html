@@ -1,42 +1,60 @@
 {% extends "base.html" %}
-
-{% block title %}Trash | Journal{% endblock %}
+{% load static %}
+{% block title %}Hidden | Journal{% endblock %}
 
 {% block content %}
-  <div class="card">
-    <h1>Recently Deleted</h1>
 
-    {% if entries %}
-      {% for entry in entries %}
-        <div style="margin-bottom:16px;">
-          <div class="muted">
-            Deleted {{ entry.deleted_at|date:"F j, Y — g:i A" }}
-          </div>
+<div class="journal-header">
+  <h2 class="page-title">
+    Hidden
+    <span class="count-badge">{{ hidden_count }}</span>
+  </h2>
 
-          <p style="white-space: pre-wrap;">
-            {{ entry.body }}
-          </p>
-
-          <form method="post"
-                action="{% url 'core:journal_restore' %}"
-                style="display:inline;">
-            {% csrf_token %}
-            <input type="hidden" name="entry_id" value="{{ entry.id }}">
-            <button type="submit">Restore</button>
-          </form>
-
-          <form method="post"
-                action="{% url 'core:journal_hard_delete' entry.id %}"
-                style="display:inline;"
-                onsubmit="return confirm('Permanently delete this entry?');">
-            {% csrf_token %}
-            <button type="submit">Delete Permanently</button>
-          </form>
-        </div>
-        <hr>
-      {% endfor %}
-    {% else %}
-      <p class="muted">Trash is empty.</p>
-    {% endif %}
+  <div class="journal-controls">
+    <a href="{% url 'journal:list' %}" class="journal-back-link">
+      ← Back to Journal
+    </a>
   </div>
+</div>
+
+<div class="card">
+
+{% if entries %}
+{% for entry in entries %}
+  <div class="journal-entry">
+
+    <div class="entry-header">
+      <div>
+        <strong>{{ entry.title }}</strong>
+        <div class="entry-preview">
+          {{ entry.body }}
+        </div>
+        <div class="muted" style="font-size:12px;">
+          Hidden {{ entry.deleted_at|date:"M d, Y • g:i A" }}
+        </div>
+      </div>
+
+      <div class="entry-actions">
+        <form method="post" action="{% url 'journal:restore' entry.id %}">
+          {% csrf_token %}
+          <button class="restore-btn">Restore</button>
+        </form>
+
+        <form method="post"
+              action="{% url 'journal:hard_delete' entry.id %}"
+              onsubmit="return confirm('Permanently delete this entry?');">
+          {% csrf_token %}
+          <button class="delete-btn danger">Delete</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+{% endfor %}
+{% else %}
+  <p class="muted">No hidden entries.</p>
+{% endif %}
+
+</div>
+
 {% endblock %}
