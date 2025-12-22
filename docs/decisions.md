@@ -60,3 +60,15 @@ These guardrails exist to protect:
 - User safety
 - Product trust
 - Long-term platform integrity
+
+---
+
+## Architecture Checkpoint — Phase 3
+
+**Status:** Approved  
+**Phase:** 3  
+
+System boundaries, ownership rules, and data lifecycle constraints
+are formally documented in `docs/architecture.md`.
+
+All future work must comply with these constraints unless explicitly revised.
