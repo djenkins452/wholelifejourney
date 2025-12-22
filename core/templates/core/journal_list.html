@@ -12,10 +12,20 @@
           <div class="muted">
             {{ entry.created_at|date:"F j, Y — g:i A" }}
           </div>
+
           <p style="margin-top: 6px; white-space: pre-wrap;">
             {{ entry.body }}
           </p>
+
+          <form method="post"
+                action="{% url 'core:journal_delete' entry.id %}"
+                style="margin-top: 8px;"
+                onsubmit="return confirm('Delete this entry? This cannot be undone.');">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+          </form>
         </div>
+
         <hr>
       {% endfor %}
     {% else %}

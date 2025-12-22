@@ -1,9 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from .models import Module, UserModule, JournalEntry
 from .forms import JournalEntryForm
+from django.views.decorators.http import require_POST
+
+
+
+
 
 @login_required
 def dashboard(request):
@@ -121,3 +126,17 @@ def journal_create(request):
         "core/journal_form.html",
         {"form": form}
     )
+
+
+
+
+@login_required
+@require_POST
+def journal_delete(request, entry_id):
+    entry = get_object_or_404(
+        JournalEntry,
+        id=entry_id,
+        user=request.user
+    )
+    entry.delete()
+    return redirect("core:journal_list")

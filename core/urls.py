@@ -8,4 +8,6 @@ urlpatterns = [
     path("settings/modules/", views.module_settings, name="module_settings"),
     path("journal/", views.journal_list, name="journal_list"),
     path("journal/new/", views.journal_create, name="journal_create"),
+    path("journal/delete/<int:entry_id>/", views.journal_delete, name="journal_delete"),
+
 ]
