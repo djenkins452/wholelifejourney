@@ -132,6 +132,8 @@
 {% endif %}
 
 {% csrf_token %}
-<script src="{% static 'js/journal.js' %}"></script>
 
+{% endblock %}
+{% block extra_js %}
+<script src="{% static 'js/journal.js' %}" defer></script>
 {% endblock %}
