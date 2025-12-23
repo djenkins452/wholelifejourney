@@ -2,10 +2,6 @@
    Whole Life Journey — Base Styles (AUTHORITATIVE)
    ====================================================== */
 
-/* ----------------------------------------
-   A) Global Box-Sizing Reset (STABILITY)
----------------------------------------- */
-
 *,
 *::before,
 *::after {
@@ -13,14 +9,14 @@
 }
 
 /* ----------------------------------------
-   Global Reset
+   Global Background
 ---------------------------------------- */
 
 body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background: #f6f7f9;
+  background: #f3f4f6;
 }
 
 /* ----------------------------------------
@@ -28,12 +24,14 @@ body {
 ---------------------------------------- */
 
 .layout {
-  display: flex;
+  display: block;
   min-height: 100vh;
 }
 
 .content {
-  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .page {
@@ -41,63 +39,164 @@ body {
 }
 
 /* ----------------------------------------
-   Sidebar (Main App)
+   Top Navigation — Amazon-Tight
 ---------------------------------------- */
 
-.sidebar {
-  width: 260px;
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background: #111827;
   color: #ffffff;
-  padding: 18px 14px;
+  padding: 6px 14px;
+  min-height: 44px;
+  z-index: 50;
 }
 
-.brand {
-  font-weight: bold;
-  font-size: 18px;
-  margin-bottom: 18px;
+.top-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.hamburger {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px;
+}
+
+.hamburger-label {
+  font-size: 13px;
+}
+
+.top-links a {
+  color: #e5e7eb;
+  text-decoration: none;
+  margin-right: 12px;
+  font-size: 13px;
+  padding-bottom: 2px;
+}
+
+.top-links a.active {
+  color: #ffffff;
+  font-weight: 600;
+  border-bottom: 2px solid #ffffff;
+}
+
+.top-links a:hover {
+  text-decoration: underline;
+}
+
+/* ----------------------------------------
+   Profile
+---------------------------------------- */
+
+.profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+/* ----------------------------------------
+   Overlay Navigation
+---------------------------------------- */
+
+.nav-overlay-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 40;
+}
+
+.nav-overlay-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100vh;
+  background: #111827;
+  color: #ffffff;
+  transform: translateX(-100%);
+  transition: transform 0.25s ease;
+  z-index: 45;
+  padding: 16px;
+}
+
+.nav-overlay.open {
+  transform: translateX(0);
+}
+
+.nav-overlay-header {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
 }
 
 .nav-section {
-  margin-top: 16px;
-  font-size: 12px;
-  opacity: 0.7;
-  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 
-.nav a {
+.nav-section-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #9ca3af;
+  margin: 8px 8px 6px;
+}
+
+.nav-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+  margin: 10px 0;
+}
+
+.nav-overlay-links a {
   display: block;
-  padding: 10px;
-  margin-top: 4px;
-  border-radius: 8px;
   color: #e5e7eb;
   text-decoration: none;
+  padding: 8px 8px;
+  border-radius: 6px;
+  font-size: 14px;
 }
 
-.nav a:hover {
-  background: rgba(255,255,255,0.08);
-}
-
-.nav a.active {
-  background: rgba(255,255,255,0.18);
+.nav-overlay-links a.active {
+  background: rgba(255,255,255,0.12);
   color: #ffffff;
   font-weight: 600;
 }
 
-/* ----------------------------------------
-   Topbar
----------------------------------------- */
-
-.topbar {
-  background: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
-  padding: 12px 18px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+.nav-overlay-links a:hover {
+  background: rgba(255,255,255,0.1);
 }
 
 /* ----------------------------------------
-   Cards / Utility
+   Cards / Utilities
 ---------------------------------------- */
 
 .card {
@@ -108,37 +207,12 @@ body {
 }
 
 .muted {
-  color: #6b7280;
-  font-size: 14px;
+  color: #9ca3af;
+  font-size: 13px;
 }
 
 /* ----------------------------------------
-   Page Title / Counts
----------------------------------------- */
-
-.page-title {
-  margin-bottom: 0.5rem;
-}
-
-.count-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 18px;
-  height: 18px;
-  padding: 0 6px;
-  border-radius: 999px;
-  font-size: 12px;
-  margin-left: 6px;
-  background: rgba(0, 0, 0, 0.08);
-}
-
-.count-badge.subtle {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-/* ----------------------------------------
-   Accessibility — Focus Visibility
+   Accessibility
 ---------------------------------------- */
 
 a:focus-visible,

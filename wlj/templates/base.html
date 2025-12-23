@@ -6,184 +6,133 @@
   <title>{% block title %}Whole Life Journey{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Base (layout, sidebar, topbar, utilities) -->
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
-
-  <!-- Profile Modal (isolated) -->
   <link rel="stylesheet" href="{% static 'css/profile.css' %}">
-
-  <!-- Journal (isolated) -->
   <link rel="stylesheet" href="{% static 'css/journal.css' %}">
+
   <script src="{% static 'js/profile.js' %}" defer></script>
-
-  <script src="{% static 'js/sidebar.js' %}" defer></script>
-
-
+  <script src="{% static 'js/topnav.js' %}" defer></script>
 </head>
 
 <body>
 <div class="layout">
 
-  <aside class="sidebar">
-    <div class="brand">Whole Life Journey</div>
-
-    <div class="nav">
-
-      <!-- Core -->
-      <div class="nav-section">Core</div>
-
-      <a href="{% url 'core:dashboard' %}"
-         class="{% if request.path == '/dashboard/' %}active{% endif %}">
-        Dashboard
-      </a>
-
-      <a href="{% url 'journal:list' %}"
-         data-module="journaling"
-         class="{% if request.path|slice:':9' == '/journal/' %}active{% endif %}">
-        Journal
-      </a>
-
-      <!-- Life Areas -->
-      <div class="nav-section">Life Areas</div>
-
-      <!-- Health -->
-      <div class="nav-group" data-group="health">
-        <div class="nav-group-title">Health</div>
-        <div class="nav-group-items">
-          <a href="/health/"
-             data-module="health"
-             class="{% if request.path == '/health/' %}active{% endif %}">
-            Overview
-          </a>
-
-          <a href="/health/weight/"
-             data-module="health"
-             class="{% if request.path == '/health/weight/' %}active{% endif %}">
-            Weight
-          </a>
-
-          <a href="/health/fasting/"
-           data-module="health"
-           class="{% if request.path == '/health/fasting/' %}active{% endif %}">
-          Fasting
-        </a>
-
-        </div>
-      </div>
-
-      <!-- Mental -->
-      <div class="nav-group" data-group="mental">
-        <div class="nav-group-title">Mental</div>
-        <div class="nav-group-items">
-          <a href="/mental/"
-             data-module="mental"
-             class="{% if request.path == '/mental/' %}active{% endif %}">
-            Overview</a>
-        </div>
-      </div>
-
-      <!-- Life -->
-      <div class="nav-group" data-group="life">
-        <div class="nav-group-title">Life</div>
-        <div class="nav-group-items">
-          <a href="/life/" 
-             data-module="life"
-             class="{% if request.path == '/life/' %}active{% endif %}">
-            Overview</a>
-        </div>
-      </div>
-
-      <!-- Finance -->
-      <div class="nav-group" data-group="finance">
-        <div class="nav-group-title">Finance</div>
-        <div class="nav-group-items">
-          <a href="/finance/" 
-             data-module="finance"
-             class="{% if request.path == '/finance/' %}active{% endif %}">
-            Overview</a>
-        </div>
-      </div>
-
-      <!-- Relationships -->
-      <div class="nav-group" data-group="relationships">
-        <div class="nav-group-title">Relationships</div>
-        <div class="nav-group-items">
-          <a href="/relationships/" 
-             data-module="relationships"
-             class="{% if request.path == '/relationships/' %}active{% endif %}">
-            Overview</a>
-        </div>
-      </div>
-
-      <!-- Learning -->
-      <div class="nav-group" data-group="learning">
-        <div class="nav-group-title">Learning</div>
-        <div class="nav-group-items">
-          <a href="/learning/" 
-             data-module="learning"
-             class="{% if request.path == '/learning/' %}active{% endif %}">
-            Overview</a>
-        </div>
-      </div>
-
-      <!-- Goals -->
-      <div class="nav-group" data-group="goals">
-        <div class="nav-group-title">Goals</div>
-        <div class="nav-group-items">
-          <a href="/goals/" 
-             data-module="goals"
-             class="{% if request.path == '/goals/' %}active{% endif %}">
-            Overview</a>
-        </div>
-      </div>
-
-      <!-- Faith -->
-      <div class="nav-group" data-group="faith">
-        <div class="nav-group-title">Faith</div>
-        <div class="nav-group-items">
-          <a href="/faith/" 
-             data-module="faith"
-             class="{% if request.path == '/faith/' %}active{% endif %}">
-            Overview</a>
-        </div>
-      </div>
-
-      <!-- Account -->
-      <div class="nav-section">Account</div>
-
-    </div>
-  </aside>
-
   <main class="content">
-    <div class="topbar">
-      {% if request.user.is_authenticated %}
-      <div
-        style="display:flex; align-items:center; gap:10px; cursor:pointer;"
-        onclick="openProfileModal()"
-        title="Profile"
-      >
-        <div class="muted">
-          {{ request.user.profile.get_display_name }}
-        </div>
-        <div
-          style="
-            width:32px;
-            height:32px;
-            border-radius:50%;
-            background:#e5e7eb;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            font-size:18px;
-          "
-        >
-          👤
-        </div>
+
+    <!-- Top Primary Navigation -->
+    <div class="top-nav">
+      <div class="top-nav-left">
+        <button class="hamburger" aria-label="All" data-hamburger>
+          ☰ <span class="hamburger-label">All</span>
+        </button>
+
+        <nav class="top-links">
+          <a href="{% url 'core:dashboard' %}"
+             class="{% if request.path == '/dashboard/' %}active{% endif %}">
+            Dashboard
+          </a>
+
+          <a href="{% url 'journal:list' %}"
+             class="{% if request.path|slice:':9' == '/journal/' %}active{% endif %}">
+            Journal
+          </a>
+
+          <a href="/health/"
+             class="{% if request.path|slice:':8' == '/health/' %}active{% endif %}">
+            Health
+          </a>
+
+          <a href="/mental/"
+             class="{% if request.path|slice:':8' == '/mental/' %}active{% endif %}">
+            Mental
+          </a>
+
+          <a href="/life/"
+             class="{% if request.path|slice:':6' == '/life/' %}active{% endif %}">
+            Life
+          </a>
+
+          <a href="/finance/"
+             class="{% if request.path|slice:':9' == '/finance/' %}active{% endif %}">
+            Finance
+          </a>
+
+          <a href="/relationships/"
+             class="{% if request.path|slice:':15' == '/relationships/' %}active{% endif %}">
+            Relationships
+          </a>
+
+          <a href="/learning/"
+             class="{% if request.path|slice:':10' == '/learning/' %}active{% endif %}">
+            Learning
+          </a>
+
+          <a href="/goals/"
+             class="{% if request.path|slice:':7' == '/goals/' %}active{% endif %}">
+            Goals
+          </a>
+
+          <a href="/faith/"
+             class="{% if request.path|slice:':7' == '/faith/' %}active{% endif %}">
+            Faith
+          </a>
+        </nav>
       </div>
-      {% else %}
-      <a href="{% url 'login' %}" class="login-link">Login</a>
-      {% endif %}
+
+      <div class="top-nav-right">
+        {% if request.user.is_authenticated %}
+        <div class="profile-trigger" onclick="openProfileModal()">
+          <div class="muted">
+            {{ request.user.profile.get_display_name }}
+          </div>
+          <div class="avatar">👤</div>
+        </div>
+        {% else %}
+        <a href="{% url 'login' %}" class="login-link">Login</a>
+        {% endif %}
+      </div>
     </div>
+
+    <!-- Overlay Backdrop -->
+    <div class="nav-overlay-backdrop" data-overlay-backdrop></div>
+
+    <!-- Overlay Panel -->
+    <aside class="nav-overlay" data-nav-overlay>
+      <div class="nav-overlay-header">
+        <strong>All</strong>
+      </div>
+
+      <nav class="nav-overlay-links">
+
+        <div class="nav-section">
+          <div class="nav-section-label">Core</div>
+          <a href="{% url 'core:dashboard' %}">Dashboard</a>
+          <a href="{% url 'journal:list' %}" data-module="journaling">Journal</a>
+        </div>
+
+        <div class="nav-divider"></div>
+
+        <div class="nav-section">
+          <div class="nav-section-label">Life Areas</div>
+          <a href="/health/" data-module="health">Health</a>
+          <a href="/mental/" data-module="mental">Mental</a>
+          <a href="/life/" data-module="life">Life</a>
+          <a href="/finance/" data-module="finance">Finance</a>
+          <a href="/relationships/" data-module="relationships">Relationships</a>
+          <a href="/learning/" data-module="learning">Learning</a>
+          <a href="/goals/" data-module="goals">Goals</a>
+          <a href="/faith/" data-module="faith">Faith</a>
+        </div>
+
+        <div class="nav-divider"></div>
+
+        <div class="nav-section">
+          <div class="nav-section-label">Account</div>
+          <a href="#" onclick="openProfileModal()">Profile & Settings</a>
+        </div>
+
+      </nav>
+    </aside>
 
     <div class="page">
       {% block content %}{% endblock %}
@@ -200,7 +149,7 @@
   </div>
 </div>
 {% endif %}
-{% block extra_js %}{% endblock %}
 
+{% block extra_js %}{% endblock %}
 </body>
 </html>
