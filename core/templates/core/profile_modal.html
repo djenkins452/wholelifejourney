@@ -78,7 +78,7 @@
             action="{% url 'core:module_settings' %}">
         {% csrf_token %}
 
-        {% for module in modules %}
+        {% for module in app_modules %}
           <label style="display:block; margin-bottom:6px;">
             <input type="checkbox"
                    name="modules"

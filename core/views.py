@@ -8,35 +8,23 @@ from .models import Module, UserModule
 
 
 def public_home(request):
-    """
-    Public-facing landing page.
-    Logged-in users are redirected to the app dashboard.
-    """
     if request.user.is_authenticated:
         return redirect("core:dashboard")
-
     return render(request, "public/home.html")
 
 
 @login_required
 def dashboard(request):
-    """
-    Authenticated user's home.
-    This is the primary app entry point.
-    """
     return render(request, "core/dashboard.html")
 
 
 # --------------------------------------------------
-# PROFILE (Phase C — REQUIRED)
+# PROFILE
 # --------------------------------------------------
 
 @login_required
 @require_POST
 def profile(request):
-    """
-    AJAX endpoint to update user profile (timezone, display name, etc).
-    """
     profile = request.user.profile
     form = ProfileForm(request.POST, instance=profile)
 
@@ -51,16 +39,39 @@ def profile(request):
 @require_POST
 def module_settings(request):
     """
-    AJAX endpoint to enable / disable user modules.
+    Enable / disable APP-LEVEL modules only.
+    Server returns authoritative enabled_module_keys.
     """
     enabled_keys = set(request.POST.getlist("modules"))
 
-    for module in Module.objects.all():
+    app_module_keys = [
+        "faith",
+        "journaling",
+        "health",
+        "mental",
+        "life",
+        "finance",
+        "relationships",
+        "learning",
+        "goals",
+    ]
+
+    app_modules = Module.objects.filter(key__in=app_module_keys)
+
+    final_enabled = []
+
+    for module in app_modules:
         user_module, _ = UserModule.objects.get_or_create(
             user=request.user,
-            module=module
+            module=module,
         )
-        user_module.enabled = module.key in enabled_keys
+        user_module.is_enabled = module.key in enabled_keys
         user_module.save()
 
-    return JsonResponse({"status": "ok"})
+        if user_module.is_enabled:
+            final_enabled.append(module.key)
+
+    return JsonResponse({
+        "status": "ok",
+        "enabled_module_keys": final_enabled,
+    })

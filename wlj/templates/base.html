@@ -10,23 +10,15 @@
   <link rel="stylesheet" href="{% static 'css/profile.css' %}">
   <link rel="stylesheet" href="{% static 'css/journal.css' %}">
 
-  <!-- Enabled modules (AUTHORITATIVE SOURCE) -->
   {% if request.user.is_authenticated %}
-  
-  {{ enabled_module_keys|json_script:"enabled-modules" }}
-
+    {{ enabled_module_keys|json_script:"enabled-modules" }}
   {% endif %}
-
-  <script src="{% static 'js/profile.js' %}" defer></script>
-  <script src="{% static 'js/topnav.js' %}" defer></script>
 </head>
 
 <body>
 <div class="layout">
-
   <main class="content">
 
-    <!-- Top Primary Navigation -->
     <div class="top-nav">
       <div class="top-nav-left">
         <button class="hamburger" aria-label="All" data-hamburger>
@@ -36,7 +28,19 @@
         <nav class="top-links">
           <a href="{% url 'core:dashboard' %}">Dashboard</a>
           <a href="{% url 'journal:list' %}" data-module="journaling">Journal</a>
-          <a href="/health/" data-module="health">Health</a>
+
+          <!-- Health with sub-items (TOP NAV) -->
+          <div class="top-nav-parent" data-module="health">
+            <a href="/health/" class="top-nav-parent-link" data-health-top-toggle>
+              Health <span class="chevron">▾</span>
+            </a>
+            <div class="top-nav-subitems" data-health-top-subitems hidden>
+              <a href="/health/">Overview</a>
+              <a href="/health/weight/">Weight</a>
+              <a href="/health/fasting/">Fasting</a>
+            </div>
+          </div>
+
           <a href="/mental/" data-module="mental">Mental</a>
           <a href="/life/" data-module="life">Life</a>
           <a href="/finance/" data-module="finance">Finance</a>
@@ -50,9 +54,7 @@
       <div class="top-nav-right">
         {% if request.user.is_authenticated %}
         <div class="profile-trigger" onclick="openProfileModal()">
-          <div class="muted">
-            {{ request.user.profile.get_display_name }}
-          </div>
+          <div class="muted">{{ request.user.profile.get_display_name }}</div>
           <div class="avatar">👤</div>
         </div>
         {% else %}
@@ -61,17 +63,12 @@
       </div>
     </div>
 
-    <!-- Overlay Backdrop -->
     <div class="nav-overlay-backdrop" data-overlay-backdrop></div>
 
-    <!-- Overlay Panel -->
     <aside class="nav-overlay" data-nav-overlay>
-      <div class="nav-overlay-header">
-        <strong>All</strong>
-      </div>
+      <div class="nav-overlay-header"><strong>All</strong></div>
 
       <nav class="nav-overlay-links">
-
         <div class="nav-section">
           <div class="nav-section-label">Core</div>
           <a href="{% url 'core:dashboard' %}">Dashboard</a>
@@ -82,7 +79,19 @@
 
         <div class="nav-section">
           <div class="nav-section-label">Life Areas</div>
-          <a href="/health/" data-module="health">Health</a>
+
+          <div class="nav-parent" data-module="health">
+            <button class="nav-parent-toggle" type="button" data-health-toggle>
+              <span>Health</span>
+              <span class="chevron">▸</span>
+            </button>
+            <div class="nav-subitems" data-health-subitems hidden>
+              <a href="/health/">Overview</a>
+              <a href="/health/weight/">Weight</a>
+              <a href="/health/fasting/">Fasting</a>
+            </div>
+          </div>
+
           <a href="/mental/" data-module="mental">Mental</a>
           <a href="/life/" data-module="life">Life</a>
           <a href="/finance/" data-module="finance">Finance</a>
@@ -98,7 +107,6 @@
           <div class="nav-section-label">Account</div>
           <a href="#" onclick="openProfileModal()">Profile & Settings</a>
         </div>
-
       </nav>
     </aside>
 
@@ -117,6 +125,10 @@
   </div>
 </div>
 {% endif %}
+
+<!-- CRITICAL GLOBAL JS (NOT OPTIONAL) -->
+<script src="{% static 'js/profile.js' %}"></script>
+<script src="{% static 'js/topnav.js' %}"></script>
 
 {% block extra_js %}{% endblock %}
 </body>
