@@ -1,26 +1,19 @@
 /* =====================================================
-   Whole Life Journey — profile.js (FIXED)
+   Whole Life Journey — profile.js
 ===================================================== */
 
 (function () {
   if (window.__WLJ_PROFILE_JS_LOADED__) return;
   window.__WLJ_PROFILE_JS_LOADED__ = true;
 
-  function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(";").shift();
-    return null;
-  }
-
   function getCsrfToken(form) {
     const input = form.querySelector("input[name='csrfmiddlewaretoken']");
-    return input ? input.value : getCookie("csrftoken");
+    return input ? input.value : null;
   }
 
   /* -------------------------------
      Modal open / close
-  ------------------------------- */
+  -------------------------------- */
 
   window.openProfileModal = function () {
     document.getElementById("profileModal")?.classList.remove("hidden");
@@ -35,49 +28,81 @@
   });
 
   /* -------------------------------
-     Profile save (CORRECT)
-  ------------------------------- */
+     Profile modal tabs
+  -------------------------------- */
+
+  document.addEventListener("click", e => {
+    const tab = e.target.closest(".profile-tab");
+    if (!tab) return;
+
+    e.preventDefault();
+
+    const modal = document.getElementById("profileModal");
+    if (!modal) return;
+
+    modal.querySelectorAll(".profile-tab").forEach(t => t.classList.remove("active"));
+    modal.querySelectorAll(".profile-tab-panel").forEach(p => p.classList.remove("active"));
+
+    tab.classList.add("active");
+    const panel = modal.querySelector(`#profile-tab-${tab.dataset.tab}`);
+    panel?.classList.add("active");
+  });
+
+  /* -------------------------------
+     Profile save (display name)
+  -------------------------------- */
 
   document.addEventListener("submit", async e => {
     if (e.target.id !== "profile-form") return;
 
     e.preventDefault();
-
     const form = e.target;
-    const csrfToken = getCsrfToken(form);
 
     const response = await fetch(form.action, {
       method: "POST",
       body: new FormData(form),
-      credentials: "same-origin",
-      headers: {
-        "X-Requested-With": "XMLHttpRequest",
-        "X-CSRFToken": csrfToken
-      }
+      headers: { "X-Requested-With": "XMLHttpRequest" },
+      credentials: "same-origin"
     });
 
-    if (!response.ok) {
-      alert("Failed to save profile.");
-      return;
-    }
+    if (!response.ok) return alert("Failed to save profile.");
 
-    const displayInput = form.querySelector(
-      'input[name="display_name"], input[name$="display_name"]'
-    );
-
-    if (displayInput) {
-      const newName = displayInput.value.trim();
-
-      /* ONLY update top-right display name */
-      document
-        .querySelectorAll(".top-nav .muted")
-        .forEach(el => el.textContent = newName);
+    const input = form.querySelector('input[name$="display_name"]');
+    if (input) {
+      document.querySelectorAll(".top-nav .muted")
+        .forEach(el => el.textContent = input.value.trim());
     }
 
     const msg = document.getElementById("profile-save-message");
-    if (msg) {
-      msg.style.display = "block";
-      setTimeout(() => (msg.style.display = "none"), 2000);
+    msg && (msg.style.display = "block");
+    setTimeout(() => msg && (msg.style.display = "none"), 2000);
+  });
+
+  /* -------------------------------
+     Modules save (AJAX)
+  -------------------------------- */
+
+  document.addEventListener("submit", async e => {
+    if (e.target.id !== "profile-modules-form") return;
+
+    e.preventDefault();
+    const form = e.target;
+
+    const response = await fetch(form.action, {
+      method: "POST",
+      body: new FormData(form),
+      headers: { "X-Requested-With": "XMLHttpRequest" },
+      credentials: "same-origin"
+    });
+
+    if (!response.ok) return alert("Failed to save modules.");
+
+    const msg = document.getElementById("modules-save-message");
+    msg && (msg.style.display = "block");
+    setTimeout(() => msg && (msg.style.display = "none"), 2000);
+
+    if (window.refreshTopNavModules) {
+      window.refreshTopNavModules();
     }
   });
 

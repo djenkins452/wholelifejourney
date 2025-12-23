@@ -1,0 +1,1282 @@
+[
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "core",
+    "model": "module"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "core",
+    "model": "usermodule"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "core",
+    "model": "journalentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "journal",
+    "model": "journalentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "core",
+    "model": "userprofile"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "health",
+    "model": "weightentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "health",
+    "model": "fast"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "2sug8nh6ncxx7tsuhkpoiizgp64v8ba6",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe-yNbK8Zh3jlPScIXr-kQCypXwqxN1RpBTQzozmTQO2dRy2Jc_DlKgnptMvC4jPXHeRHqj3pmKr6zwFtSfqsIu6tZRf16P9G4xYRuqpaGsQHEQ4GeToMzwgmn3UFp24YtjAh845tmffieTAgaONFuWiC32-6Pw36g:1vXPAe:vxhR2PahljkoMxtw799OzRm_FgFzO4nBSvBXQftHdTA",
+    "expire_date": "2026-01-04T19:32:48.568Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "jmn6ea8jp5lhqqv2d9eowosj1ra7pwkj",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQAP9lz4YgdAv06L3f0Cy7IFUDSR8n47-bJj3odWYyb5ho38q0r2mZZoEBrnD5ZZH4meoh5EH13hS3ui1zVEeiTruqsUl63c72b1BoLTBASIatmI4yInOkzjuMMffMol1ImsQFT5gta_J9Mpktos8OrQ0iUcPnCw3WOMw:1vXKTI:d34nEDwj01cUy8e73uP4FwoErM86ofEutUT4JVq_RmQ",
+    "expire_date": "2026-01-04T14:31:44.766Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "lzyrdaamomvkip952v7bnnbq32ubha1w",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe-yNbK8Zh3jlPScIXr-kQCypXwqxN1RpBTQzozmTQO2dRy2Jc_DlKgnptMvC4jPXHeRHqj3pmKr6zwFtSfqsIu6tZRf16P9G4xYRuqpaGsQHEQ4GeToMzwgmn3UFp24YtjAh845tmffieTAgaONFuWiC32-6Pw36g:1vY5mW:iYY3KvCPnM6qzedDCN3e7iv9Qvc_f9RURHj7rIa1MD8",
+    "expire_date": "2026-01-06T17:02:44.904Z"
+  }
+},
+{
+  "model": "core.module",
+  "pk": 1,
+  "fields": {
+    "key": "journaling",
+    "name": "Journaling",
+    "description": "Daily entries and AI reflections",
+    "is_active_globally": true,
+    "sort_order": 10
+  }
+},
+{
+  "model": "core.module",
+  "pk": 2,
+  "fields": {
+    "key": "fasting",
+    "name": "Fasting",
+    "description": "Track fasting windows and consistency",
+    "is_active_globally": true,
+    "sort_order": 20
+  }
+},
+{
+  "model": "core.module",
+  "pk": 3,
+  "fields": {
+    "key": "weight",
+    "name": "Weight",
+    "description": "Track weight trend over time",
+    "is_active_globally": true,
+    "sort_order": 30
+  }
+},
+{
+  "model": "core.module",
+  "pk": 4,
+  "fields": {
+    "key": "food",
+    "name": "Food",
+    "description": "Food log and patterns (simple)",
+    "is_active_globally": true,
+    "sort_order": 40
+  }
+},
+{
+  "model": "core.module",
+  "pk": 5,
+  "fields": {
+    "key": "glucose",
+    "name": "Blood Glucose",
+    "description": "Manual entry or future CGM sync",
+    "is_active_globally": true,
+    "sort_order": 50
+  }
+},
+{
+  "model": "core.module",
+  "pk": 6,
+  "fields": {
+    "key": "blood_pressure",
+    "name": "Blood Pressure",
+    "description": "Readings + trends",
+    "is_active_globally": true,
+    "sort_order": 60
+  }
+},
+{
+  "model": "core.module",
+  "pk": 7,
+  "fields": {
+    "key": "heart_rate",
+    "name": "Heart Rate",
+    "description": "Resting HR and trends",
+    "is_active_globally": true,
+    "sort_order": 70
+  }
+},
+{
+  "model": "core.module",
+  "pk": 8,
+  "fields": {
+    "key": "workouts",
+    "name": "Workouts",
+    "description": "Resistance + cardio logging",
+    "is_active_globally": true,
+    "sort_order": 80
+  }
+},
+{
+  "model": "core.module",
+  "pk": 9,
+  "fields": {
+    "key": "faith",
+    "name": "Faith",
+    "description": "",
+    "is_active_globally": true,
+    "sort_order": 5
+  }
+},
+{
+  "model": "core.module",
+  "pk": 10,
+  "fields": {
+    "key": "journal",
+    "name": "Journal",
+    "description": "",
+    "is_active_globally": true,
+    "sort_order": 10
+  }
+},
+{
+  "model": "core.module",
+  "pk": 11,
+  "fields": {
+    "key": "health",
+    "name": "Health",
+    "description": "",
+    "is_active_globally": true,
+    "sort_order": 20
+  }
+},
+{
+  "model": "core.module",
+  "pk": 12,
+  "fields": {
+    "key": "mental",
+    "name": "Mental",
+    "description": "",
+    "is_active_globally": true,
+    "sort_order": 30
+  }
+},
+{
+  "model": "core.module",
+  "pk": 13,
+  "fields": {
+    "key": "life",
+    "name": "Life",
+    "description": "",
+    "is_active_globally": true,
+    "sort_order": 40
+  }
+},
+{
+  "model": "core.module",
+  "pk": 14,
+  "fields": {
+    "key": "finance",
+    "name": "Finance",
+    "description": "",
+    "is_active_globally": true,
+    "sort_order": 50
+  }
+},
+{
+  "model": "core.module",
+  "pk": 15,
+  "fields": {
+    "key": "relationships",
+    "name": "Relationships",
+    "description": "",
+    "is_active_globally": true,
+    "sort_order": 60
+  }
+},
+{
+  "model": "core.module",
+  "pk": 16,
+  "fields": {
+    "key": "learning",
+    "name": "Learning",
+    "description": "",
+    "is_active_globally": true,
+    "sort_order": 70
+  }
+},
+{
+  "model": "core.module",
+  "pk": 17,
+  "fields": {
+    "key": "goals",
+    "name": "Goals",
+    "description": "",
+    "is_active_globally": true,
+    "sort_order": 80
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add user module",
+    "content_type": [
+      "core",
+      "usermodule"
+    ],
+    "codename": "add_usermodule"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change user module",
+    "content_type": [
+      "core",
+      "usermodule"
+    ],
+    "codename": "change_usermodule"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete user module",
+    "content_type": [
+      "core",
+      "usermodule"
+    ],
+    "codename": "delete_usermodule"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view user module",
+    "content_type": [
+      "core",
+      "usermodule"
+    ],
+    "codename": "view_usermodule"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add module",
+    "content_type": [
+      "core",
+      "module"
+    ],
+    "codename": "add_module"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change module",
+    "content_type": [
+      "core",
+      "module"
+    ],
+    "codename": "change_module"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete module",
+    "content_type": [
+      "core",
+      "module"
+    ],
+    "codename": "delete_module"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view module",
+    "content_type": [
+      "core",
+      "module"
+    ],
+    "codename": "view_module"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add journal entry",
+    "content_type": [
+      "core",
+      "journalentry"
+    ],
+    "codename": "add_journalentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change journal entry",
+    "content_type": [
+      "core",
+      "journalentry"
+    ],
+    "codename": "change_journalentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete journal entry",
+    "content_type": [
+      "core",
+      "journalentry"
+    ],
+    "codename": "delete_journalentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view journal entry",
+    "content_type": [
+      "core",
+      "journalentry"
+    ],
+    "codename": "view_journalentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add journal entry",
+    "content_type": [
+      "journal",
+      "journalentry"
+    ],
+    "codename": "add_journalentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change journal entry",
+    "content_type": [
+      "journal",
+      "journalentry"
+    ],
+    "codename": "change_journalentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete journal entry",
+    "content_type": [
+      "journal",
+      "journalentry"
+    ],
+    "codename": "delete_journalentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view journal entry",
+    "content_type": [
+      "journal",
+      "journalentry"
+    ],
+    "codename": "view_journalentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add user profile",
+    "content_type": [
+      "core",
+      "userprofile"
+    ],
+    "codename": "add_userprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change user profile",
+    "content_type": [
+      "core",
+      "userprofile"
+    ],
+    "codename": "change_userprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete user profile",
+    "content_type": [
+      "core",
+      "userprofile"
+    ],
+    "codename": "delete_userprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view user profile",
+    "content_type": [
+      "core",
+      "userprofile"
+    ],
+    "codename": "view_userprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add weight entry",
+    "content_type": [
+      "health",
+      "weightentry"
+    ],
+    "codename": "add_weightentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change weight entry",
+    "content_type": [
+      "health",
+      "weightentry"
+    ],
+    "codename": "change_weightentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete weight entry",
+    "content_type": [
+      "health",
+      "weightentry"
+    ],
+    "codename": "delete_weightentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view weight entry",
+    "content_type": [
+      "health",
+      "weightentry"
+    ],
+    "codename": "view_weightentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add fast",
+    "content_type": [
+      "health",
+      "fast"
+    ],
+    "codename": "add_fast"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change fast",
+    "content_type": [
+      "health",
+      "fast"
+    ],
+    "codename": "change_fast"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete fast",
+    "content_type": [
+      "health",
+      "fast"
+    ],
+    "codename": "delete_fast"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view fast",
+    "content_type": [
+      "health",
+      "fast"
+    ],
+    "codename": "view_fast"
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$FVy2dVdXNuZ1jwpWL27D6R$m41VlR3izt/OzHuW1BecmwRtkyxdZflOw/AT5BOBS4E=",
+    "last_login": "2025-12-23T17:02:44.898Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "dannyjenkins71@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-12-21T14:30:49.304Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.userprofile",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "display_name": "Danny Jenkins",
+    "timezone": "US/Eastern",
+    "created_at": "2025-12-22T21:48:31.600Z",
+    "updated_at": "2025-12-23T17:01:25.824Z"
+  }
+},
+{
+  "model": "core.usermodule",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "module": 1,
+    "is_enabled": true,
+    "enabled_at": "2025-12-22T22:22:41.235Z"
+  }
+},
+{
+  "model": "core.usermodule",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "module": 2,
+    "is_enabled": false,
+    "enabled_at": "2025-12-22T21:27:42.569Z"
+  }
+},
+{
+  "model": "core.usermodule",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "module": 3,
+    "is_enabled": true,
+    "enabled_at": "2025-12-22T22:22:38.877Z"
+  }
+},
+{
+  "model": "core.usermodule",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "module": 4,
+    "is_enabled": false,
+    "enabled_at": null
+  }
+},
+{
+  "model": "core.usermodule",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "module": 5,
+    "is_enabled": false,
+    "enabled_at": null
+  }
+},
+{
+  "model": "core.usermodule",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "module": 6,
+    "is_enabled": false,
+    "enabled_at": null
+  }
+},
+{
+  "model": "core.usermodule",
+  "pk": 7,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "module": 7,
+    "is_enabled": true,
+    "enabled_at": "2025-12-22T21:30:08.530Z"
+  }
+},
+{
+  "model": "core.usermodule",
+  "pk": 8,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "module": 8,
+    "is_enabled": false,
+    "enabled_at": null
+  }
+},
+{
+  "model": "core.usermodule",
+  "pk": 9,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "module": 9,
+    "is_enabled": false,
+    "enabled_at": null
+  }
+},
+{
+  "model": "core.usermodule",
+  "pk": 10,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "module": 10,
+    "is_enabled": false,
+    "enabled_at": null
+  }
+},
+{
+  "model": "core.usermodule",
+  "pk": 11,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "module": 11,
+    "is_enabled": false,
+    "enabled_at": null
+  }
+},
+{
+  "model": "core.usermodule",
+  "pk": 12,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "module": 12,
+    "is_enabled": false,
+    "enabled_at": null
+  }
+},
+{
+  "model": "core.usermodule",
+  "pk": 13,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "module": 13,
+    "is_enabled": false,
+    "enabled_at": null
+  }
+},
+{
+  "model": "core.usermodule",
+  "pk": 14,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "module": 14,
+    "is_enabled": false,
+    "enabled_at": null
+  }
+},
+{
+  "model": "core.usermodule",
+  "pk": 15,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "module": 15,
+    "is_enabled": false,
+    "enabled_at": null
+  }
+},
+{
+  "model": "core.usermodule",
+  "pk": 16,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "module": 16,
+    "is_enabled": false,
+    "enabled_at": null
+  }
+},
+{
+  "model": "core.usermodule",
+  "pk": 17,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "module": 17,
+    "is_enabled": false,
+    "enabled_at": null
+  }
+},
+{
+  "model": "journal.journalentry",
+  "pk": 8,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "title": "Today's test",
+    "body": "a;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljfa;sdlkfjasdl;fjkasdlfjalsdkfjasdlfjadsljf",
+    "entry_date": "2025-12-22T19:04:52Z",
+    "created_at": "2025-12-22T16:09:44.484Z",
+    "deleted_at": null
+  }
+},
+{
+  "model": "journal.journalentry",
+  "pk": 9,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "title": "Testing new entry Monday, Dec 22, 2025 06:09 PM",
+    "body": "here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff. here is where I write stuff.",
+    "entry_date": "2025-12-22T19:04:52Z",
+    "created_at": "2025-12-22T18:09:46.112Z",
+    "deleted_at": null
+  }
+},
+{
+  "model": "journal.journalentry",
+  "pk": 11,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "title": "Monday, Dec 22, 2025 07:01 PM",
+    "body": "test",
+    "entry_date": "2025-12-22T19:04:52.325Z",
+    "created_at": "2025-12-22T19:01:22.313Z",
+    "deleted_at": "2025-12-23T02:08:27.111Z"
+  }
+},
+{
+  "model": "journal.journalentry",
+  "pk": 12,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "title": "Put something in the beginning - Monday, Dec 22, 2025 08:05 PM",
+    "body": "I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.  I have something to say.",
+    "entry_date": "2025-12-01T15:05:00Z",
+    "created_at": "2025-12-22T20:06:07.492Z",
+    "deleted_at": null
+  }
+},
+{
+  "model": "journal.journalentry",
+  "pk": 13,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "title": "Back dated to november - Monday, Dec 22, 2025 08:06 PM",
+    "body": "I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.  I love dogs.",
+    "entry_date": "2025-11-01T15:06:00Z",
+    "created_at": "2025-12-22T20:07:26.575Z",
+    "deleted_at": null
+  }
+},
+{
+  "model": "journal.journalentry",
+  "pk": 14,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "title": "Way back in the past Monday, Dec 22, 2025 08:08 PM",
+    "body": "I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.  I am able to entries in the past.",
+    "entry_date": "2025-08-22T15:08:00Z",
+    "created_at": "2025-12-22T20:08:46.074Z",
+    "deleted_at": null
+  }
+},
+{
+  "model": "journal.journalentry",
+  "pk": 16,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "title": "Test Title - Monday, Dec 22",
+    "body": "test",
+    "entry_date": "2025-12-22T20:43:00Z",
+    "created_at": "2025-12-22T20:43:43.045Z",
+    "deleted_at": "2025-12-23T01:30:47.870Z"
+  }
+},
+{
+  "model": "journal.journalentry",
+  "pk": 20,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "title": "test - Monday, Dec 22, 2025",
+    "body": "test",
+    "entry_date": "2025-12-22T21:25:00Z",
+    "created_at": "2025-12-22T21:25:58.679Z",
+    "deleted_at": "2025-12-22T22:49:02.782Z"
+  }
+},
+{
+  "model": "journal.journalentry",
+  "pk": 21,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "title": "test",
+    "body": "test",
+    "entry_date": "2025-12-22T22:46:00Z",
+    "created_at": "2025-12-22T22:46:15.230Z",
+    "deleted_at": "2025-12-22T22:47:13.739Z"
+  }
+},
+{
+  "model": "journal.journalentry",
+  "pk": 22,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "title": "testing the new title concept",
+    "body": "here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.  here is the body.",
+    "entry_date": "2025-12-22T22:50:00Z",
+    "created_at": "2025-12-22T22:50:55.902Z",
+    "deleted_at": null
+  }
+},
+{
+  "model": "health.fast",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "date": "2025-12-22",
+    "start_time": "19:46:00",
+    "end_time": "12:33:00",
+    "note": "",
+    "created_at": "2025-12-23T04:33:54.659Z"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2025-12-22T15:19:25.239Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "journal",
+      "journalentry"
+    ],
+    "object_id": "1",
+    "object_repr": "JournalEntry(admin @ 2025-12-22)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+}
+]

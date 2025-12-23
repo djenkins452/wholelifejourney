@@ -5,7 +5,8 @@ from .forms import ProfileForm
 def enabled_modules(request):
     """
     Global context for:
-    - enabled modules (sidebar)
+    - enabled modules (templates)
+    - enabled module keys (JS / nav enforcement)
     - profile modal (timezone + modules)
 
     MUST be defensive: context processors run on every request.
@@ -13,6 +14,7 @@ def enabled_modules(request):
     if not request.user.is_authenticated:
         return {
             "enabled_modules": [],
+            "enabled_module_keys": [],
             "modules": [],
             "enabled_keys": set(),
             "profile_form": None,
@@ -24,7 +26,7 @@ def enabled_modules(request):
         defaults={"timezone": "UTC"},
     )
 
-    # Enabled modules (sidebar)
+    # Enabled modules for this user
     user_modules = (
         UserModule.objects
         .select_related("module")
@@ -33,6 +35,7 @@ def enabled_modules(request):
     )
 
     enabled_modules = [um.module for um in user_modules]
+    enabled_module_keys = [um.module.key for um in user_modules]
 
     # All globally available modules (profile modal)
     all_modules = (
@@ -41,12 +44,13 @@ def enabled_modules(request):
         .order_by("sort_order", "name")
     )
 
-    enabled_keys = {um.module.key for um in user_modules}
+    enabled_keys = set(enabled_module_keys)
 
     profile_form = ProfileForm(instance=profile)
 
     return {
-        "enabled_modules": enabled_modules,
+        "enabled_modules": enabled_modules,          # for templates
+        "enabled_module_keys": enabled_module_keys,  # for JS / JSON
         "modules": all_modules,
         "enabled_keys": enabled_keys,
         "profile_form": profile_form,

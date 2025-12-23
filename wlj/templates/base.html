@@ -10,6 +10,13 @@
   <link rel="stylesheet" href="{% static 'css/profile.css' %}">
   <link rel="stylesheet" href="{% static 'css/journal.css' %}">
 
+  <!-- Enabled modules (AUTHORITATIVE SOURCE) -->
+  {% if request.user.is_authenticated %}
+  
+  {{ enabled_module_keys|json_script:"enabled-modules" }}
+
+  {% endif %}
+
   <script src="{% static 'js/profile.js' %}" defer></script>
   <script src="{% static 'js/topnav.js' %}" defer></script>
 </head>
@@ -27,55 +34,16 @@
         </button>
 
         <nav class="top-links">
-          <a href="{% url 'core:dashboard' %}"
-             class="{% if request.path == '/dashboard/' %}active{% endif %}">
-            Dashboard
-          </a>
-
-          <a href="{% url 'journal:list' %}"
-             class="{% if request.path|slice:':9' == '/journal/' %}active{% endif %}">
-            Journal
-          </a>
-
-          <a href="/health/"
-             class="{% if request.path|slice:':8' == '/health/' %}active{% endif %}">
-            Health
-          </a>
-
-          <a href="/mental/"
-             class="{% if request.path|slice:':8' == '/mental/' %}active{% endif %}">
-            Mental
-          </a>
-
-          <a href="/life/"
-             class="{% if request.path|slice:':6' == '/life/' %}active{% endif %}">
-            Life
-          </a>
-
-          <a href="/finance/"
-             class="{% if request.path|slice:':9' == '/finance/' %}active{% endif %}">
-            Finance
-          </a>
-
-          <a href="/relationships/"
-             class="{% if request.path|slice:':15' == '/relationships/' %}active{% endif %}">
-            Relationships
-          </a>
-
-          <a href="/learning/"
-             class="{% if request.path|slice:':10' == '/learning/' %}active{% endif %}">
-            Learning
-          </a>
-
-          <a href="/goals/"
-             class="{% if request.path|slice:':7' == '/goals/' %}active{% endif %}">
-            Goals
-          </a>
-
-          <a href="/faith/"
-             class="{% if request.path|slice:':7' == '/faith/' %}active{% endif %}">
-            Faith
-          </a>
+          <a href="{% url 'core:dashboard' %}">Dashboard</a>
+          <a href="{% url 'journal:list' %}" data-module="journaling">Journal</a>
+          <a href="/health/" data-module="health">Health</a>
+          <a href="/mental/" data-module="mental">Mental</a>
+          <a href="/life/" data-module="life">Life</a>
+          <a href="/finance/" data-module="finance">Finance</a>
+          <a href="/relationships/" data-module="relationships">Relationships</a>
+          <a href="/learning/" data-module="learning">Learning</a>
+          <a href="/goals/" data-module="goals">Goals</a>
+          <a href="/faith/" data-module="faith">Faith</a>
         </nav>
       </div>
 
