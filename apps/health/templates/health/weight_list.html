@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}Weight{% endblock %}
+
+{% block content %}
+<div class="page">
+  <h2 class="page-title">Weight</h2>
+
+  <form method="post" class="card" style="max-width:420px;">
+    {% csrf_token %}
+
+    {% if editing_entry %}
+      <input type="hidden" name="entry_id" value="{{ editing_entry.id }}">
+    {% endif %}
+
+    <div class="form-row">
+      <label>Date</label>
+      <input
+        type="date"
+        name="date"
+        value="{% if editing_entry %}{{ editing_entry.date|date:'Y-m-d' }}{% else %}{{ today|date:'Y-m-d' }}{% endif %}"
+      >
+
+
+    </div>
+
+    <div class="form-row">
+      <label>Weight</label>
+      <input
+        type="number"
+        step="0.1"
+        name="weight"
+        required
+        autofocus
+        {% if editing_entry %}value="{{ editing_entry.weight }}"{% endif %}
+      >
+
+    </div>
+
+    <div class="form-row">
+      <label>Note (optional)</label>
+      <input
+        type="text"
+        name="note"
+        maxlength="255"
+        placeholder="e.g. travel, sick, heavy workout"
+        {% if editing_entry %}value="{{ editing_entry.note }}"{% endif %}
+      >
+    </div>
+
+    <button type="submit">
+      {% if editing_entry %}Update{% else %}Save{% endif %}
+    </button>
+
+    {% if editing_entry %}
+      <a href="{% url 'health:weight_list' %}" class="cancel-link">Cancel</a>
+    {% endif %}
+  </form>
+
+  <div style="margin-top:20px;">
+    {% if grouped_entries %}
+      {% for week, entries in grouped_entries.items %}
+        <h3 class="muted" style="margin:16px 0 8px;">{{ week }}</h3>
+
+        <div class="card">
+          {% for entry in entries %}
+            <div class="journal-entry">
+              <div class="entry-header">
+                <strong>{{ entry.date }}</strong>
+                <div>{{ entry.weight }} lbs</div>
+
+                {% if entry.note %}
+                  <div class="muted" style="font-size:12px;">
+                    {{ entry.note }}
+                  </div>
+                {% endif %}
+
+                <div class="entry-actions">
+                  <a href="?edit={{ entry.id }}" class="entry-action">
+                    Edit
+                  </a>
+
+                  <form
+                    method="post"
+                    action="{% url 'health:weight_delete' entry.id %}"
+                  >
+                    {% csrf_token %}
+                    <button class="entry-action-delete" type="submit">
+                      Delete
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="muted">No weight entries yet.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

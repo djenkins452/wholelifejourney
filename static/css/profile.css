@@ -1,0 +1,131 @@
+/* =====================================================
+   Profile Modal — Isolated Styles
+===================================================== */
+
+.profile-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+.profile-modal.hidden {
+  display: none;
+}
+
+.profile-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+}
+
+.profile-modal-content {
+  position: relative;
+  width: 900px;
+  max-width: 95%;
+  height: 80vh;
+  margin: 60px auto;
+  background: #ffffff;
+  border-radius: 14px;
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+}
+
+.profile-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  border: none;
+  background: #111827;
+  color: #ffffff;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+/* ----------------------------------------
+   Profile Modal Layout
+---------------------------------------- */
+
+.profile-layout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.profile-sidebar {
+  width: 220px;
+  background: #111827;
+  color: #ffffff;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.profile-sidebar .profile-tab {
+  padding: 10px;
+  border-radius: 8px;
+  color: #e5e7eb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.profile-sidebar .profile-tab:hover,
+.profile-sidebar .profile-tab.active {
+  background: rgba(255,255,255,0.15);
+  color: #ffffff;
+}
+
+.profile-main {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+/* ----------------------------------------
+   Profile Tabs
+---------------------------------------- */
+
+.profile-tab-panel {
+  display: none;
+}
+
+.profile-tab-panel.active {
+  display: block;
+}
+
+/* ----------------------------------------
+   Profile Modal Forms
+---------------------------------------- */
+
+.profile-main label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.profile-main input[type="text"],
+.profile-main select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  font-size: 14px;
+}
+
+.profile-main button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  background: #111827;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.profile-main button:hover {
+  opacity: 0.9;
+}

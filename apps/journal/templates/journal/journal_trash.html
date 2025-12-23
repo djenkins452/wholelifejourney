@@ -7,7 +7,7 @@
 <div class="journal-header">
   <h2 class="page-title">
     Hidden
-    <span class="count-badge">{{ hidden_count }}</span>
+    <span class="count-badge">{{ entries|length }}</span>
   </h2>
 
   <div class="journal-controls">
@@ -20,37 +20,39 @@
 <div class="card">
 
 {% if entries %}
-{% for entry in entries %}
-  <div class="journal-entry">
+  {% for entry in entries %}
+    <div class="journal-entry">
 
-    <div class="entry-header">
-      <div>
-        <strong>{{ entry.title }}</strong>
-        <div class="entry-preview">
-          {{ entry.body }}
+      <div class="entry-header">
+        <div>
+          <strong>{{ entry.title }}</strong>
+
+          <div class="entry-preview">
+            {{ entry.body }}
+          </div>
+
+          <div class="muted" style="font-size:12px;">
+            Hidden {{ entry.deleted_at|date:"M d, Y • g:i A" }}
+          </div>
         </div>
-        <div class="muted" style="font-size:12px;">
-          Hidden {{ entry.deleted_at|date:"M d, Y • g:i A" }}
+
+        <div class="entry-actions">
+          <form method="post" action="{% url 'journal:restore' entry.id %}">
+            {% csrf_token %}
+            <button class="restore-btn">Restore</button>
+          </form>
+
+          <form method="post"
+                action="{% url 'journal:hard_delete' entry.id %}"
+                onsubmit="return confirm('Permanently delete this entry?');">
+            {% csrf_token %}
+            <button class="delete-btn danger">Delete</button>
+          </form>
         </div>
       </div>
 
-      <div class="entry-actions">
-        <form method="post" action="{% url 'journal:restore' entry.id %}">
-          {% csrf_token %}
-          <button class="restore-btn">Restore</button>
-        </form>
-
-        <form method="post"
-              action="{% url 'journal:hard_delete' entry.id %}"
-              onsubmit="return confirm('Permanently delete this entry?');">
-          {% csrf_token %}
-          <button class="delete-btn danger">Delete</button>
-        </form>
-      </div>
     </div>
-
-  </div>
-{% endfor %}
+  {% endfor %}
 {% else %}
   <p class="muted">No hidden entries.</p>
 {% endif %}

@@ -1,19 +1,91 @@
-<div class="profile-sidebar">
-  <a href="#" class="profile-tab active" data-tab="profile">Profile</a>
-  <a href="#" class="profile-tab" data-tab="settings">Settings</a>
-  <a href="#" class="profile-tab" data-tab="modules">Modules</a>
-</div>
+<div class="profile-layout">
 
-<div class="profile-main">
-  <div id="profile-tab-profile" class="profile-tab-panel active">
-    {% include "core/profile_profile.html" %}
+  <!-- LEFT SIDEBAR -->
+  <div class="profile-sidebar">
+    <a href="#"
+       class="profile-tab active"
+       data-tab="profile">
+      Profile
+    </a>
+
+    <a href="#"
+       class="profile-tab"
+       data-tab="settings">
+      Settings
+    </a>
+
+    <a href="#"
+       class="profile-tab"
+       data-tab="modules">
+      Modules
+    </a>
   </div>
 
-  <div id="profile-tab-settings" class="profile-tab-panel">
-    {% include "core/profile_settings.html" %}
-  </div>
+  <!-- MAIN CONTENT -->
+  <div class="profile-main">
 
-  <div id="profile-tab-modules" class="profile-tab-panel">
-    {% include "core/profile_modules.html" %}
+    <!-- PROFILE TAB -->
+    <div class="profile-tab-panel active" id="profile-tab-profile">
+      <h2>Profile</h2>
+
+      <form id="profile-form" method="post">
+        {% csrf_token %}
+
+        <label>Display Name</label>
+        {{ profile_form.display_name }}
+
+        <label>Time Zone</label>
+        {{ profile_form.timezone }}
+
+        <button type="submit">Save</button>
+      </form>
+
+      <div id="profile-save-message"
+           class="muted"
+           style="display:none; margin-top:10px;">
+        Profile saved.
+      </div>
+    </div>
+
+    <!-- SETTINGS TAB -->
+    <div class="profile-tab-panel" id="profile-tab-settings">
+      <h2>Settings</h2>
+      <p class="muted">
+        Settings will live here (notifications, security, preferences).
+      </p>
+    </div>
+
+    <!-- MODULES TAB -->
+    <div class="profile-tab-panel" id="profile-tab-modules">
+      <h2>Modules</h2>
+
+      <form id="profile-modules-form"
+            method="post"
+            action="{% url 'core:module_settings' %}">
+
+        {% csrf_token %}
+
+        {% for module in modules %}
+          <label style="display:block; margin-bottom:6px;">
+            <input type="checkbox"
+                   name="modules"
+                   value="{{ module.key }}"
+                   {% if module.key in enabled_keys %}checked{% endif %}>
+            {{ module.name }}
+          </label>
+        {% endfor %}
+
+        <button type="submit" style="margin-top:12px;">
+          Save Modules
+        </button>
+      </form>
+
+      <div id="modules-save-message"
+           class="muted"
+           style="display:none; margin-top:10px;">
+        Modules saved.
+      </div>
+    </div>
+
   </div>
 </div>

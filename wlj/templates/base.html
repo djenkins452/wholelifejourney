@@ -6,67 +6,19 @@
   <title>{% block title %}Whole Life Journey{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- Base (layout, sidebar, topbar, utilities) -->
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+  <!-- Profile Modal (isolated) -->
+  <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+  <!-- Journal (isolated) -->
+  <link rel="stylesheet" href="{% static 'css/journal.css' %}">
   <script src="{% static 'js/profile.js' %}" defer></script>
 
-  <!-- RESTORED ORIGINAL LAYOUT STYLES -->
-  <style>
-    body { margin: 0; font-family: Arial, sans-serif; background: #f6f7f9; }
-    .layout { display: flex; min-height: 100vh; }
+  <script src="{% static 'js/sidebar.js' %}" defer></script>
 
-    .sidebar {
-      width: 260px;
-      background: #111827;
-      color: #fff;
-      padding: 18px 14px;
-    }
-    .brand {
-      font-weight: bold;
-      font-size: 18px;
-      margin-bottom: 18px;
-    }
-    .nav-section {
-      margin-top: 16px;
-      font-size: 12px;
-      opacity: .7;
-      text-transform: uppercase;
-    }
-    .nav a {
-      display: block;
-      padding: 10px;
-      margin-top: 4px;
-      border-radius: 8px;
-      color: #e5e7eb;
-      text-decoration: none;
-    }
-    .nav a:hover {
-      background: rgba(255,255,255,.08);
-    }
-    .nav a.active {
-      background: rgba(255,255,255,.18);
-      color: #ffffff;
-      font-weight: 600;
-    }
 
-    .content { flex: 1; }
-    .topbar {
-      background: #fff;
-      border-bottom: 1px solid #e5e7eb;
-      padding: 12px 18px;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-    }
-    .page { padding: 18px; }
-
-    .card {
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 16px;
-    }
-    .muted { color: #6b7280; font-size: 13px; }
-  </style>
 </head>
 
 <body>
@@ -76,6 +28,8 @@
     <div class="brand">Whole Life Journey</div>
 
     <div class="nav">
+
+      <!-- Core -->
       <div class="nav-section">Core</div>
 
       <a href="{% url 'core:dashboard' %}"
@@ -84,20 +38,147 @@
       </a>
 
       <a href="{% url 'journal:list' %}"
+         data-module="journaling"
          class="{% if request.path|slice:':9' == '/journal/' %}active{% endif %}">
         Journal
       </a>
 
+      <!-- Life Areas -->
+      <div class="nav-section">Life Areas</div>
+
+      <!-- Health -->
+      <div class="nav-group" data-group="health">
+        <div class="nav-group-title">Health</div>
+        <div class="nav-group-items">
+          <a href="/health/"
+             data-module="health"
+             class="{% if request.path == '/health/' %}active{% endif %}">
+            Overview
+          </a>
+
+          <a href="/health/weight/"
+             data-module="health"
+             class="{% if request.path == '/health/weight/' %}active{% endif %}">
+            Weight
+          </a>
+
+          <a href="/health/fasting/"
+           data-module="health"
+           class="{% if request.path == '/health/fasting/' %}active{% endif %}">
+          Fasting
+        </a>
+
+        </div>
+      </div>
+
+      <!-- Mental -->
+      <div class="nav-group" data-group="mental">
+        <div class="nav-group-title">Mental</div>
+        <div class="nav-group-items">
+          <a href="/mental/"
+             data-module="mental"
+             class="{% if request.path == '/mental/' %}active{% endif %}">
+            Overview</a>
+        </div>
+      </div>
+
+      <!-- Life -->
+      <div class="nav-group" data-group="life">
+        <div class="nav-group-title">Life</div>
+        <div class="nav-group-items">
+          <a href="/life/" 
+             data-module="life"
+             class="{% if request.path == '/life/' %}active{% endif %}">
+            Overview</a>
+        </div>
+      </div>
+
+      <!-- Finance -->
+      <div class="nav-group" data-group="finance">
+        <div class="nav-group-title">Finance</div>
+        <div class="nav-group-items">
+          <a href="/finance/" 
+             data-module="finance"
+             class="{% if request.path == '/finance/' %}active{% endif %}">
+            Overview</a>
+        </div>
+      </div>
+
+      <!-- Relationships -->
+      <div class="nav-group" data-group="relationships">
+        <div class="nav-group-title">Relationships</div>
+        <div class="nav-group-items">
+          <a href="/relationships/" 
+             data-module="relationships"
+             class="{% if request.path == '/relationships/' %}active{% endif %}">
+            Overview</a>
+        </div>
+      </div>
+
+      <!-- Learning -->
+      <div class="nav-group" data-group="learning">
+        <div class="nav-group-title">Learning</div>
+        <div class="nav-group-items">
+          <a href="/learning/" 
+             data-module="learning"
+             class="{% if request.path == '/learning/' %}active{% endif %}">
+            Overview</a>
+        </div>
+      </div>
+
+      <!-- Goals -->
+      <div class="nav-group" data-group="goals">
+        <div class="nav-group-title">Goals</div>
+        <div class="nav-group-items">
+          <a href="/goals/" 
+             data-module="goals"
+             class="{% if request.path == '/goals/' %}active{% endif %}">
+            Overview</a>
+        </div>
+      </div>
+
+      <!-- Faith -->
+      <div class="nav-group" data-group="faith">
+        <div class="nav-group-title">Faith</div>
+        <div class="nav-group-items">
+          <a href="/faith/" 
+             data-module="faith"
+             class="{% if request.path == '/faith/' %}active{% endif %}">
+            Overview</a>
+        </div>
+      </div>
+
+      <!-- Account -->
       <div class="nav-section">Account</div>
       <a href="{% url 'logout' %}">Logout</a>
+
     </div>
   </aside>
 
   <main class="content">
     <div class="topbar">
-      <!-- CSS-ONLY AVATAR (NO IMAGE DEPENDENCY) -->
-      <div class="avatar-button" onclick="openProfileModal()" title="Profile">
-        👤
+      <div
+        style="display:flex; align-items:center; gap:10px; cursor:pointer;"
+        onclick="openProfileModal()"
+        title="Profile"
+      >
+        <div class="muted">
+          {{ request.user.profile.get_display_name }}
+        </div>
+        <div
+          style="
+            width:32px;
+            height:32px;
+            border-radius:50%;
+            background:#e5e7eb;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:18px;
+          "
+        >
+          👤
+        </div>
       </div>
     </div>
 
@@ -107,7 +188,6 @@
   </main>
 </div>
 
-<!-- PROFILE MODAL -->
 <div id="profileModal" class="profile-modal hidden">
   <div class="profile-modal-backdrop" onclick="closeProfileModal()"></div>
   <div class="profile-modal-content">

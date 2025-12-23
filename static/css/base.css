@@ -1,6 +1,16 @@
 /* ======================================================
-   Whole Life Journey — Base Styles (LOCKED)
+   Whole Life Journey — Base Styles (AUTHORITATIVE)
    ====================================================== */
+
+/* ----------------------------------------
+   A) Global Box-Sizing Reset (STABILITY)
+---------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 /* ----------------------------------------
    Global Reset
@@ -9,6 +19,97 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: Arial, sans-serif;
+  background: #f6f7f9;
+}
+
+/* ----------------------------------------
+   Layout
+---------------------------------------- */
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
+.page {
+  padding: 18px;
+}
+
+/* ----------------------------------------
+   Sidebar (Main App)
+---------------------------------------- */
+
+.sidebar {
+  width: 260px;
+  background: #111827;
+  color: #ffffff;
+  padding: 18px 14px;
+}
+
+.brand {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 18px;
+}
+
+.nav-section {
+  margin-top: 16px;
+  font-size: 12px;
+  opacity: 0.7;
+  text-transform: uppercase;
+}
+
+.nav a {
+  display: block;
+  padding: 10px;
+  margin-top: 4px;
+  border-radius: 8px;
+  color: #e5e7eb;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.nav a.active {
+  background: rgba(255,255,255,0.18);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* ----------------------------------------
+   Topbar
+---------------------------------------- */
+
+.topbar {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 12px 18px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* ----------------------------------------
+   Cards / Utility
+---------------------------------------- */
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.muted {
+  color: #6b7280;
+  font-size: 14px;
 }
 
 /* ----------------------------------------
@@ -37,294 +138,11 @@ body {
 }
 
 /* ----------------------------------------
-   Journal Header
+   Accessibility — Focus Visibility
 ---------------------------------------- */
 
-.journal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.journal-controls {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-}
-
-.journal-trash-link,
-.journal-back-link {
-  font-size: 14px;
-  color: #2563eb;
-  text-decoration: none;
-}
-
-/* ----------------------------------------
-   Journal Form
----------------------------------------- */
-
-.journal-form-card {
-  margin-bottom: 16px;
-}
-
-.form-row {
-  margin-bottom: 10px;
-}
-
-.form-actions {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.cancel-link {
-  font-size: 14px;
-  text-decoration: none;
-}
-
-/* ----------------------------------------
-   Expand / Collapse
----------------------------------------- */
-
-.expand-all {
-  margin: 6px 0 10px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  color: #2563eb;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.expand-all img {
-  width: 16px;
-  height: 16px;
-}
-
-/* ----------------------------------------
-   Journal Entries
----------------------------------------- */
-
-.journal-entry {
-  border-bottom: 1px solid #e5e7eb;
-  padding: 12px 0;
-}
-
-.entry-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.entry-left {
-  flex: 1;
-  min-width: 0;
-}
-
-.entry-preview {
-  margin-top: 6px;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  white-space: pre-wrap;
-  word-break: break-word;
-  color: #374151;
-}
-
-.entry-toggle {
-  background: #fff;
-  border: 1px solid rgba(0,0,0,0.25);
-  padding: 4px 6px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.entry-toggle img {
-  width: 16px;
-  height: 16px;
-}
-
-.entry-body {
-  display: none;
-  margin-top: 10px;
-}
-
-.entry-text {
-  white-space: pre-wrap;
-  word-break: break-word;
-  margin-bottom: 10px;
-  color: #111827;
-}
-
-/* ----------------------------------------
-   Entry Actions (STABILIZED)
----------------------------------------- */
-
-.entry-actions {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-top: 8px;
-}
-
-.entry-action {
-  font-size: 13px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  background: transparent;
-  border: 1px solid transparent;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-/* Edit */
-.entry-action-edit {
-  color: #2563eb;
-}
-
-/* Hide */
-.entry-action-hide {
-  color: #6b7280;
-}
-
-/* Delete (danger) */
-.entry-action-delete {
-  color: #b91c1c;
-}
-
-.entry-action-delete:hover {
-  background: rgba(185, 28, 28, 0.08);
-}
-
-/* ----------------------------------------
-   Utility
----------------------------------------- */
-
-.muted {
-  color: #6b7280;
-  font-size: 14px;
-}
-
-/* ----------------------------------------
-   Profile Modal
----------------------------------------- */
-
-.avatar-button {
-  float: right;
-  cursor: pointer;
-}
-
-.avatar-button img {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-}
-
-.profile-modal.hidden {
-  display: none;
-}
-
-.profile-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-}
-
-.profile-modal-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-}
-
-.profile-modal-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 900px;
-  max-width: 95%;
-  height: 80vh;
-  background: #fff;
-  border-radius: 14px;
-  display: flex;
-  overflow: hidden;
-}
-
-.profile-close {
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  font-size: 26px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-/* Sidebar inside modal */
-.profile-sidebar {
-  width: 220px;
-  background: #111827;
-  color: #fff;
-  padding: 16px;
-}
-
-.profile-sidebar a {
-  display: block;
-  padding: 10px;
-  border-radius: 8px;
-  color: #e5e7eb;
-  text-decoration: none;
-}
-
-.profile-sidebar a.active,
-.profile-sidebar a:hover {
-  background: rgba(255,255,255,.15);
-}
-
-/* Content */
-.profile-main {
-  flex: 1;
-  padding: 20px;
-  overflow-y: auto;
-}
-
-/* ----------------------------------------
-   Avatar Button
----------------------------------------- */
-
-.avatar-button {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #e5e7eb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.avatar-button:hover {
-  background: #d1d5db;
-}
-
-/* ----------------------------------------
-   Profile Tabs
----------------------------------------- */
-
-.profile-tab-panel {
-  display: none;
-}
-
-.profile-tab-panel.active {
-  display: block;
-}
-
-.profile-sidebar .profile-tab.active {
-  background: rgba(255,255,255,.2);
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
 }

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Fasting{% endblock %}
+
+{% block content %}
+<h2 class="page-title">Fasting</h2>
+
+<form method="post" class="card" style="max-width:420px;">
+  {% csrf_token %}
+
+  <div class="form-row">
+    <label>Date</label>
+    <input type="date" name="date" value="{{ today|date:'Y-m-d' }}" required>
+  </div>
+
+  <div class="form-row">
+    <label>Start Time</label>
+    <input type="time" name="start_time" required>
+  </div>
+
+  <div class="form-row">
+    <label>End Time</label>
+    <input type="time" name="end_time" required>
+  </div>
+
+  <div class="form-row">
+    <label>Note (optional)</label>
+    <input type="text" name="note" placeholder="e.g. 16:8, water only">
+  </div>
+
+  <button type="submit">Save Fast</button>
+</form>
+
+{% if fasts %}
+  <h3 class="muted" style="margin-top:20px;">Fasts</h3>
+  <div class="card">
+    {% for fast in fasts %}
+      <div class="journal-entry">
+        <div class="entry-header">
+          <strong>
+            {{ fast.date }} — {{ fast.start_time }} → {{ fast.end_time }}
+          </strong>
+          {% if fast.note %}
+            <div class="muted">{{ fast.note }}</div>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+{% endblock %}

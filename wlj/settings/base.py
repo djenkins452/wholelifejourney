@@ -20,9 +20,24 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    # Core
     "core.apps.CoreConfig",
+
+    # Existing
     "apps.journal",
+
+    # Life pillar apps (Phase B)
+    "apps.health",
+    "apps.mental",
+    "apps.life",
+    "apps.finance",
+    "apps.relationships",
+    "apps.learning",
+    "apps.goals",
+    "apps.faith",
 ]
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

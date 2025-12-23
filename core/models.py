@@ -13,6 +13,12 @@ class UserProfile(models.Model):
         related_name="profile"
     )
 
+    display_name = models.CharField(
+        max_length=100,
+        blank=True,
+        help_text="Name shown throughout the app (falls back to full name or username)"
+    )
+
     timezone = models.CharField(
         max_length=50,
         default="UTC",
@@ -21,6 +27,19 @@ class UserProfile(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def get_display_name(self):
+        """
+        Best-available human name for UI and AI interactions
+        """
+        if self.display_name:
+            return self.display_name
+
+        full_name = self.user.get_full_name()
+        if full_name:
+            return full_name
+
+        return self.user.username
 
     def __str__(self):
         return f"Profile for {self.user}"

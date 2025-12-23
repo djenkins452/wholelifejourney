@@ -3,7 +3,59 @@
 <form id="profile-form" method="post">
   {% csrf_token %}
 
-  <div style="margin-bottom: 12px;">
+  <!-- Avatar + Identity -->
+  <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px;">
+    <div
+      style="
+        width:64px;
+        height:64px;
+        border-radius:50%;
+        background:#e5e7eb;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-size:32px;
+      "
+      title="Avatar (coming soon)"
+    >
+      👤
+    </div>
+
+    <div>
+      <div style="margin-bottom:6px;">
+        <strong>{{ request.user.profile.get_display_name }}</strong>
+      </div>
+      <div class="muted">
+        {{ request.user.email }}
+      </div>
+    </div>
+  </div>
+
+  {% with fallback_name=request.user.profile.get_display_name %}
+    <!-- Display Name -->
+    <div style="margin-bottom:14px;">
+      {{ profile_form.display_name.label_tag }}<br>
+
+      {% if profile_form.display_name.value %}
+        {{ profile_form.display_name }}
+      {% else %}
+        <input
+          type="text"
+          name="{{ profile_form.display_name.name }}"
+          id="{{ profile_form.display_name.id_for_label }}"
+          value="{{ fallback_name }}"
+          maxlength="100"
+        />
+      {% endif %}
+
+      <div class="muted" style="margin-top:4px;">
+        This is how we’ll refer to you in the app. You can change it anytime.
+      </div>
+    </div>
+  {% endwith %}
+
+  <!-- Time Zone -->
+  <div style="margin-bottom:14px;">
     {{ profile_form.timezone.label_tag }}<br>
     {{ profile_form.timezone }}
   </div>
@@ -11,8 +63,10 @@
   <button type="submit">Save</button>
 </form>
 
-<div id="profile-save-message"
-     class="muted"
-     style="margin-top:10px; display:none;">
+<div
+  id="profile-save-message"
+  class="muted"
+  style="margin-top:10px; display:none;"
+>
   Profile saved.
 </div>

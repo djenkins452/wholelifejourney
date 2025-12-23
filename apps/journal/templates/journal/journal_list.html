@@ -7,7 +7,7 @@
 <div class="journal-header">
   <h2 class="page-title">
     Journal
-    <span class="count-badge">{{ entries|length }}</span>
+    <span class="count-badge">{{ total_count }}</span>
   </h2>
 
   <div class="journal-controls">
@@ -62,61 +62,74 @@
   <span id="toggleAllText">Expand all</span>
 </button>
 
-<div class="card">
+{% if grouped_entries %}
+  {% for group in grouped_entries %}
+    <h3 class="muted" style="margin:16px 0 8px;">
+      {{ group.label }}
+    </h3>
 
-{% if entries %}
-  {% for entry in entries %}
-    <div class="journal-entry">
+    <div class="card">
+      {% for entry in group.entries %}
+        <div class="journal-entry">
 
-      <!-- HEADER -->
-      <div class="entry-header">
-        <div class="entry-left">
-          <strong>{{ entry.title }}</strong>
-          <div class="entry-preview preview" id="preview-{{ entry.id }}">
-            {{ entry.body }}
+          <div class="entry-header">
+            <div class="entry-left">
+              <strong>
+                {% if entry.display_title %}
+                  {{ entry.display_title }}
+                {% else %}
+                  Journal Entry
+                {% endif %}
+              </strong>
+
+              <div class="muted" style="margin-top:4px;">
+                {{ entry.display_date }}
+              </div>
+
+              <div class="entry-preview preview" id="preview-{{ entry.id }}">
+                {{ entry.body }}
+              </div>
+            </div>
+
+            <button class="entry-toggle"
+                    onclick="toggleEntry('{{ entry.id }}', this)"
+                    type="button">
+              <img src="{% static 'icons/arrow-right.svg' %}" alt="">
+            </button>
           </div>
+
+          <div class="entry-body" id="entry-{{ entry.id }}">
+            <div class="entry-text">
+              {{ entry.body }}
+            </div>
+
+            <div class="entry-actions">
+              <a href="{% url 'journal:edit' entry.id %}"
+                 class="entry-action entry-action-edit">
+                Edit
+              </a>
+
+              <button type="button"
+                      class="entry-action entry-action-hide"
+                      onclick="submitDelete('hide', '{{ entry.id }}')">
+                Hide
+              </button>
+
+              <button type="button"
+                      class="entry-action entry-action-delete"
+                      onclick="submitDelete('delete', '{{ entry.id }}')">
+                Delete
+              </button>
+            </div>
+          </div>
+
         </div>
-
-        <button class="entry-toggle"
-                onclick="toggleEntry('{{ entry.id }}', this)"
-                type="button">
-          <img src="{% static 'icons/arrow-right.svg' %}" alt="">
-        </button>
-      </div>
-
-      <!-- BODY -->
-      <div class="entry-body" id="entry-{{ entry.id }}">
-        <div class="entry-text">
-          {{ entry.body }}
-        </div>
-
-        <div class="entry-actions">
-          <a href="{% url 'journal:edit' entry.id %}"
-             class="entry-action entry-action-edit">
-            Edit
-          </a>
-
-          <button type="button"
-                  class="entry-action entry-action-hide"
-                  onclick="submitDelete('hide', '{{ entry.id }}')">
-            Hide
-          </button>
-
-          <button type="button"
-                  class="entry-action entry-action-delete"
-                  onclick="submitDelete('delete', '{{ entry.id }}')">
-            Delete
-          </button>
-        </div>
-      </div>
-
+      {% endfor %}
     </div>
   {% endfor %}
 {% else %}
   <p class="muted">No journal entries found.</p>
 {% endif %}
-
-</div>
 
 {% csrf_token %}
 <script src="{% static 'js/journal.js' %}"></script>
