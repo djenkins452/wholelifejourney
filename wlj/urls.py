@@ -1,26 +1,31 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-from .views import home
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path("wlj-super-duper/", admin.site.urls),
 
+    # Auth (canonical)
     path(
         "login/",
         auth_views.LoginView.as_view(template_name="login.html"),
         name="login",
     ),
-    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path(
+        "logout/",
+        auth_views.LogoutView.as_view(next_page="/"),
+        name="logout",
+    ),
 
-    # Public / core
-    path("", home, name="home"),
+    # Public root -> core public home
+    # (core.urls already maps "" to views.public_home)
     path("", include("core.urls")),
 
     # Journal
     path("journal/", include("apps.journal.urls")),
 
-    # Life pillar modules (Phase B)
+    # Life pillar modules
     path("health/", include("apps.health.urls")),
     path("mental/", include("apps.mental.urls")),
     path("life/", include("apps.life.urls")),

@@ -65,6 +65,58 @@
   });
 
   /* ================================
+     Profile Save (Display Name Sync)
+  ================================ */
+
+  document.addEventListener("submit", async e => {
+    if (e.target.id !== "profile-form") return;
+
+    e.preventDefault();
+
+    const form = e.target;
+    const csrfToken = getCsrfToken(form);
+
+    const response = await fetch(form.action || window.location.href, {
+      method: "POST",
+      body: new FormData(form),
+      credentials: "same-origin",
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+        "X-CSRFToken": csrfToken
+      }
+    });
+
+    if (!response.ok) {
+      alert("Failed to save profile.");
+      return;
+    }
+
+    /* ----------------------------------------
+       Update top-right display name live
+    ---------------------------------------- */
+
+    const displayInput = form.querySelector(
+      'input[name="display_name"], input[name$="display_name"]'
+    );
+
+    if (displayInput) {
+      const newName = displayInput.value.trim();
+      if (newName) {
+        const topbarName = document.querySelector(".topbar .muted");
+        if (topbarName) {
+          topbarName.textContent = newName;
+        }
+      }
+    }
+
+    const msg = document.getElementById("profile-save-message");
+    if (msg) {
+      msg.style.display = "block";
+      setTimeout(() => (msg.style.display = "none"), 2000);
+    }
+  });
+
+  /* ================================
      Modules Save + Sidebar Update
   ================================ */
 
@@ -95,7 +147,6 @@
        SAFE SIDEBAR SYNC (ONLY HIDE IF EXPLICIT)
     ---------------------------------------- */
 
-    // Build a map of checkbox states by module key
     const checkboxMap = {};
     form.querySelectorAll('input[type="checkbox"]').forEach(cb => {
       checkboxMap[norm(cb.value)] = cb.checked;
@@ -104,7 +155,6 @@
     document.querySelectorAll(".sidebar [data-module]").forEach(link => {
       const key = norm(link.dataset.module);
 
-      // Only change visibility if this module exists in the form
       if (key in checkboxMap) {
         if (checkboxMap[key]) {
           link.hidden = false;
@@ -114,7 +164,6 @@
           link.style.display = "none";
         }
       }
-      // else: DO NOTHING (leave server-rendered state alone)
     });
 
     const msg = document.getElementById("modules-save-message");

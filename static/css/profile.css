@@ -1,4 +1,4 @@
-/* =====================================================
+/* ======================================================
    Profile Modal — Isolated Styles
 ===================================================== */
 
@@ -58,12 +58,13 @@
   width: 220px;
   background: #111827;
   color: #ffffff;
-  padding: 16px;
+  padding: 16px 16px 24px 16px;
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
+/* Base nav item look */
 .profile-sidebar .profile-tab {
   padding: 10px;
   border-radius: 8px;
@@ -77,6 +78,35 @@
   background: rgba(255,255,255,0.15);
   color: #ffffff;
 }
+
+/* ----------------------------------------
+   Logout (nav-style, bottom-left)
+---------------------------------------- */
+
+.profile-logout-form {
+  margin-top: auto;
+  padding-top: 24px; /* intentional separation */
+}
+
+/* Make logout visually identical to profile-tab */
+.profile-logout-btn {
+  all: unset;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  color: #e5e7eb;
+  cursor: pointer;
+}
+
+.profile-logout-btn:hover {
+  background: rgba(255,255,255,0.15);
+  color: #ffffff;
+}
+
+/* ----------------------------------------
+   Main Content
+---------------------------------------- */
 
 .profile-main {
   flex: 1;

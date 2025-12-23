@@ -2,6 +2,7 @@
 
   <!-- LEFT SIDEBAR -->
   <div class="profile-sidebar">
+
     <a href="#"
        class="profile-tab active"
        data-tab="profile">
@@ -19,6 +20,17 @@
        data-tab="modules">
       Modules
     </a>
+
+    <!-- Logout (pinned bottom-left) -->
+    <form method="post"
+          action="{% url 'logout' %}"
+          class="profile-logout-form">
+      {% csrf_token %}
+      <button type="submit" class="profile-logout-btn">
+        Logout
+      </button>
+    </form>
+
   </div>
 
   <!-- MAIN CONTENT -->

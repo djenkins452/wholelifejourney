@@ -10,7 +10,7 @@ urlpatterns = [
     # App (authenticated)
     path("app/", views.dashboard, name="dashboard"),
 
-    # Profile / Settings (EXISTING, REQUIRED)
+    # Profile / Settings
     path("profile/", views.profile, name="profile"),
     path("settings/modules/", views.module_settings, name="module_settings"),
 ]
