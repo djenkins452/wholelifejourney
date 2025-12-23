@@ -20,6 +20,9 @@ STATICFILES_STORAGE = (
     "whitenoise.storage.CompressedManifestStaticFilesStorage"
 )
 
+# 🔴 THIS WAS MISSING (REQUIRED FOR PROD)
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
