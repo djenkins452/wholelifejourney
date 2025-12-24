@@ -1,0 +1,33 @@
+{% load static %}
+
+<div class="card journal-tile">
+  <div class="journal-tile-header">
+    <span style="font-size: 18px;">⚖️</span>
+    <h2>{{ tile.title }}</h2>
+  </div>
+
+  <div class="journal-tile-metrics">
+    {% if tile.metrics.starting_weight and tile.metrics.current_weight %}
+      Start {{ tile.metrics.starting_weight }} lbs
+      &nbsp;→&nbsp;
+      <strong>{{ tile.metrics.current_weight }}</strong> lbs
+
+      &nbsp;·&nbsp;
+
+      {% if tile.metrics.weight_change > 0 %}
+        🔻 <strong>{{ tile.metrics.weight_change|floatformat:1 }}</strong> lbs lost
+      {% elif tile.metrics.weight_change < 0 %}
+        🔺 <strong>{{ tile.metrics.weight_change|floatformat:1|cut:"-" }}</strong> lbs gained
+      {% else %}
+        ⚖️ no change
+      {% endif %}
+    {% else %}
+      <strong>No weight data yet</strong>
+    {% endif %}
+  </div>
+
+
+  <a href="{{ tile.cta.url }}" class="journal-tile-cta">
+    {{ tile.cta.label }}
+  </a>
+</div>

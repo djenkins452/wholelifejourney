@@ -1,0 +1,25 @@
+{% load static %}
+
+<div class="card journal-tile">
+  <div class="journal-tile-header">
+    <span style="font-size: 18px;">⏱️</span>
+    <h2>{{ tile.title }}</h2>
+  </div>
+
+  <div class="journal-tile-metrics">
+  <strong>🔥 {{ tile.metrics.streak_days }}</strong>
+  day streak
+  &nbsp;·&nbsp;
+  📓 {{ tile.metrics.total_entries }} fasts
+
+  {% if tile.metrics.weekly_avg_hours %}
+    &nbsp;·&nbsp;
+    ⏱️ {{ tile.metrics.weekly_avg_hours }} hr avg
+  {% endif %}
+</div>
+
+
+  <a href="{{ tile.cta.url }}" class="journal-tile-cta">
+    {{ tile.cta.label }}
+  </a>
+</div>

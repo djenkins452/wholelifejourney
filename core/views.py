@@ -3,9 +3,17 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
 
+
+
 from .forms import ProfileForm
 from .models import Module, UserModule
 
+# --------------------------------------------------
+# DASHBOARD
+# --------------------------------------------------
+from core.services.dashboard_tiles.journal import build_journal_tile
+from core.services.dashboard_tiles.health_weight import build_health_weight_tile
+from core.services.dashboard_tiles.health_fasting import build_health_fasting_tile
 
 def public_home(request):
     if request.user.is_authenticated:
@@ -13,9 +21,27 @@ def public_home(request):
     return render(request, "public/home.html")
 
 
+def about(request):
+    return render(request, "public/about.html")
+
+
 @login_required
 def dashboard(request):
-    return render(request, "core/dashboard.html")
+    tiles = [
+        build_journal_tile(request.user),
+        build_health_weight_tile(request.user),
+        build_health_fasting_tile(request.user),
+    ]
+
+
+    return render(
+        request,
+        "core/dashboard.html",
+        {
+            "tiles": tiles,
+        },
+    )
+
 
 
 # --------------------------------------------------

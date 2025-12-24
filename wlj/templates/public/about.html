@@ -1,0 +1,81 @@
+{% extends "public/base_public.html" %}
+
+{% block title %}About | Whole Life Journey{% endblock %}
+
+{% block content %}
+  <section class="section">
+    <div class="public-container">
+      <div class="about-hero">
+        <div class="about-copy">
+          <h1 class="section-title" style="margin-bottom: 8px;">About Whole Life Journey</h1>
+          <p class="section-subtitle" style="margin-bottom: 0;">
+            Whole Life Journey was created to be a quiet, private place to reflect and grow—without noise, pressure, or comparison.
+          </p>
+        </div>
+
+        <div class="about-card">
+          <div class="about-card-label">Built for real life</div>
+          <div class="about-card-text">
+            Not optimization. Not performance. Just clarity and growth over time.
+          </div>
+        </div>
+      </div>
+
+      <div class="about-grid">
+        <div class="tile tile-accent-blue">
+          <div class="tile-head">
+            <div class="tile-icon">👤</div>
+            <div class="tile-title">Danny</div>
+          </div>
+          <div class="tile-body">
+            I built Whole Life Journey because I needed one place where faith, health, journaling, relationships, and goals could be connected—calmly and privately.
+          </div>
+          <div class="tile-foot">Founder • Builder • Lifelong learner</div>
+        </div>
+
+        <div class="tile tile-accent-purple">
+          <div class="tile-head">
+            <div class="tile-icon">🤍</div>
+            <div class="tile-title">Heather</div>
+          </div>
+          <div class="tile-body">
+            My wife Heather has been a steady voice of encouragement. Her heart for faith, people, and reflection helped shape the spirit behind this project.
+          </div>
+          <div class="tile-foot">A cameo of the heart behind the build</div>
+        </div>
+
+        <div class="tile tile-accent-green">
+          <div class="tile-head">
+            <div class="tile-icon">🛡️</div>
+            <div class="tile-title">Privacy & trust</div>
+          </div>
+          <div class="tile-body">
+            Whole Life Journey is designed to be a private space—no feeds, no ads, and no pressure to perform.
+          </div>
+          <div class="tile-foot">Private by design</div>
+        </div>
+      </div>
+
+      <div class="section" style="padding-left: 0; padding-right: 0;">
+        <div class="public-container" style="padding-left: 0; padding-right: 0;">
+          <div class="about-mission">
+            <h2 class="section-title">The mission</h2>
+            <p class="section-subtitle">
+              Help people see patterns across their life—so decisions feel clearer, habits feel lighter, and growth feels sustainable.
+            </p>
+
+            <div class="about-actions">
+              {% if request.user.is_authenticated %}
+                <a class="btn btn-primary" href="{% url 'core:dashboard' %}">Go to app</a>
+              {% else %}
+                <a class="btn btn-primary" href="{% url 'login' %}">Try it free</a>
+              {% endif %}
+              <a class="btn btn-ghost" href="{% url 'core:public_home' %}">Back to home</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+{% endblock %}

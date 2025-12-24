@@ -6,6 +6,7 @@ app_name = "core"
 urlpatterns = [
     # Public
     path("", views.public_home, name="public_home"),
+    path("about/", views.about, name="about"),
 
     # App (authenticated)
     path("app/", views.dashboard, name="dashboard"),

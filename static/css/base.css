@@ -320,6 +320,73 @@ body {
   font-size: 13px;
 }
 
+/* =====================================
+   Dashboard Tiles — Journal (Momentum)
+===================================== */
+
+.journal-tile {
+  position: relative;
+  padding: 18px 20px;
+  border-left: 5px solid #3b82f6; /* blue accent */
+}
+
+.journal-tile-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.journal-tile-metrics {
+  font-size: 14px;
+  color: #374151;
+  margin-bottom: 14px;
+}
+
+.journal-tile-metrics strong {
+  font-size: 18px;
+  margin-right: 6px;
+}
+
+.journal-tile-cta {
+  display: inline-block;
+  padding: 8px 14px;
+  background: #3b82f6;
+  color: #ffffff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.journal-tile-cta:hover {
+  background: #2563eb;
+}
+
+/* =====================================
+   Dashboard Grid
+===================================== */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* Tablet */
+@media (max-width: 1100px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
 /* ----------------------------------------
    Accessibility
 ---------------------------------------- */

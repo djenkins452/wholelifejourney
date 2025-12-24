@@ -3,10 +3,19 @@
 {% block title %}Dashboard | Whole Life Journey{% endblock %}
 
 {% block content %}
-  <div class="card">
-    <h1>Dashboard</h1>
-    <p class="muted">
-      Shared layout is active. Navigation will become user-aware next.
-    </p>
+  <h1>Dashboard</h1>
+
+  <div class="dashboard-grid">
+    {% for tile in tiles %}
+      {% if tile.key == "journal" %}
+        {% include "core/tiles/journal_tile.html" %}
+      {% elif tile.key == "health_weight" %}
+        {% include "core/tiles/health_weight_tile.html" %}
+      {% elif tile.key == "health_fasting" %}
+        {% include "core/tiles/health_fasting_tile.html" %}
+      {% endif %}
+    {% endfor %}
+
   </div>
 {% endblock %}
+

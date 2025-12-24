@@ -1,0 +1,26 @@
+{% load static %}
+
+<div class="card journal-tile">
+  <div class="journal-tile-header">
+    <img
+      src="{% static 'icons/journal.svg' %}"
+      alt="Journal"
+      width="22"
+      height="22"
+    />
+    <h2>{{ tile.title }}</h2>
+  </div>
+
+  <div class="journal-tile-metrics">
+    <strong>🔥 {{ tile.metrics.streak_days }}</strong>
+    day streak
+    &nbsp;·&nbsp;
+    📓 {{ tile.metrics.total_entries }} entries
+    &nbsp;·&nbsp;
+    🙈 {{ tile.metrics.hidden_entries }} hidden
+  </div>
+
+  <a href="{{ tile.cta.url }}" class="journal-tile-cta">
+    Write today
+  </a>
+</div>

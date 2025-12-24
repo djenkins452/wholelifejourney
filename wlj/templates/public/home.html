@@ -1,23 +1,251 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Whole Life Journey</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
+{% extends "public/base_public.html" %}
 
-  <h1>Whole Life Journey</h1>
+{% block title %}Whole Life Journey | A simpler way to understand your whole life{% endblock %}
 
-  <p>
-    A personal life intelligence platform designed to bring clarity
-    across health, habits, reflection, and purpose.
-  </p>
+{% block content %}
+  <!-- HERO -->
+  <section class="hero">
+    <div class="public-container hero-inner">
+      <div class="hero-copy">
+        <div class="pill">Private • Modular • Human-first AI</div>
 
-  <p>
-    <a href="/login/">Sign in</a> |
-    <a href="/register/">Create an account</a>
-  </p>
+        <div class="hero-title-wrap">
+          <h1 class="hero-title">
+            A simpler way to understand your whole life.
+          </h1>
+        </div>
 
-</body>
-</html>
+
+        <p class="hero-subtitle">
+          Whole Life Journey brings your faith, health, reflections, and goals together—and gently uses AI to help you
+          notice patterns that make life easier to navigate.
+        </p>
+
+        <div class="hero-cta">
+          {% if request.user.is_authenticated %}
+            <a class="btn btn-primary" href="{% url 'core:dashboard' %}">Go to your dashboard</a>
+          {% else %}
+            <a class="btn btn-primary" href="{% url 'login' %}">Try it free</a>
+            <a class="btn btn-ghost" href="#how">See how it works</a>
+          {% endif %}
+        </div>
+
+        <div class="trust-row">
+          <div class="trust-item">No ads</div>
+          <div class="trust-dot">•</div>
+          <div class="trust-item">No feeds</div>
+          <div class="trust-dot">•</div>
+          <div class="trust-item">No comparison</div>
+          <div class="trust-dot">•</div>
+          <div class="trust-item">Built for privacy</div>
+        </div>
+      </div>
+
+      <!-- HERO CARD GRID (Amazon-style tiles) -->
+      <div class="hero-tiles" aria-label="Preview tiles">
+        <div class="tile tile-accent-purple">
+          <div class="tile-head">
+            <div class="tile-icon">🕊️</div>
+            <div class="tile-title">Faith</div>
+          </div>
+          <div class="tile-body">
+            Reflect, pray, and notice spiritual rhythms—quietly, privately, consistently.
+          </div>
+          <div class="tile-foot">Rhythms • gratitude • growth</div>
+        </div>
+
+        <div class="tile tile-accent-blue">
+          <div class="tile-head">
+            <div class="tile-icon">📓</div>
+            <div class="tile-title">Journaling</div>
+          </div>
+          <div class="tile-body">
+            Capture thoughts, emotions, and moments—then watch patterns emerge over time.
+          </div>
+          <div class="tile-foot">Streaks • highlights • reflection</div>
+        </div>
+
+        <div class="tile tile-accent-green">
+          <div class="tile-head">
+            <div class="tile-icon">⚖️</div>
+            <div class="tile-title">Health</div>
+          </div>
+          <div class="tile-body">
+            Weight, fasting, and health signals—tracked without shame, designed for progress.
+          </div>
+          <div class="tile-foot">Momentum • consistency • clarity</div>
+        </div>
+
+        <div class="tile tile-accent-amber">
+          <div class="tile-head">
+            <div class="tile-icon">🎯</div>
+            <div class="tile-title">Goals</div>
+          </div>
+          <div class="tile-body">
+            Set direction, follow through, and build small wins into a stronger future.
+          </div>
+          <div class="tile-foot">Focus • action • follow-through</div>
+        </div>
+      </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT HELPS -->
+  <section id="how" class="section">
+    <div class="public-container">
+      <h2 class="section-title">How it makes life easier</h2>
+      <p class="section-subtitle">
+        Life doesn’t happen in separate apps. Whole Life Journey brings it together—calmly.
+      </p>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-title">Clarity instead of clutter</div>
+          <div class="feature-text">One system for the parts of life that matter—no more scattered notes and apps.</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-title">Gentle consistency</div>
+          <div class="feature-text">Progress snapshots and streaks that encourage you without guilt or pressure.</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-title">Patterns you can trust</div>
+          <div class="feature-text">AI highlights connections you might miss—so decisions feel clearer and grounded.</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-title">Privacy by design</div>
+          <div class="feature-text">No ads. No feeds. No comparison. Your life stays yours.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI -->
+  <section id="ai" class="section section-soft">
+    <div class="public-container">
+      <h2 class="section-title">AI that feels human</h2>
+      <p class="section-subtitle">
+        AI in Whole Life Journey is a mirror, not a manager. It quietly reflects patterns in your own history.
+      </p>
+
+      <div class="ai-grid">
+        <div class="ai-card">
+          <div class="ai-label">What it does</div>
+          <ul class="ai-list">
+            <li>Summarizes your week in plain language</li>
+            <li>Highlights recurring patterns across modules</li>
+            <li>Suggests gentle next steps you can ignore or use</li>
+          </ul>
+        </div>
+
+        <div class="ai-card">
+          <div class="ai-label">What it never does</div>
+          <ul class="ai-list">
+            <li>Judges or pressures you</li>
+            <li>Turns your life into a scoreboard</li>
+            <li>Shares your data or sells it</li>
+          </ul>
+        </div>
+
+        <div class="ai-card ai-quote">
+          <div class="ai-label">Example reflections</div>
+          <div class="quote">
+            “You tend to journal more clearly after fasting.”<br>
+            “Stress rises when finances go unreviewed.”<br>
+            “Faith reflections deepen during seasons of transition.”
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULES -->
+  <section id="modules" class="section">
+    <div class="public-container">
+      <h2 class="section-title">Life areas (modules)</h2>
+      <p class="section-subtitle">
+        Use one or many. Everything works better together—but nothing is required.
+      </p>
+
+      <div class="module-grid">
+        <div class="module-card"><div class="module-name">Faith</div><div class="module-desc">Reflect, pray, and notice spiritual rhythms.</div></div>
+        <div class="module-card"><div class="module-name">Journaling</div><div class="module-desc">Capture thoughts, emotions, and moments.</div></div>
+        <div class="module-card"><div class="module-name">Health</div><div class="module-desc">Weight, fasting, and signals—without shame.</div></div>
+        <div class="module-card"><div class="module-name">Mental Health</div><div class="module-desc">Mood awareness and emotional patterns.</div></div>
+        <div class="module-card"><div class="module-name">Life</div><div class="module-desc">Milestones, transitions, and seasons.</div></div>
+        <div class="module-card"><div class="module-name">Finance</div><div class="module-desc">Clarity and intention around money.</div></div>
+        <div class="module-card"><div class="module-name">Relationships</div><div class="module-desc">Gratitude, connection, and growth.</div></div>
+        <div class="module-card"><div class="module-name">Learning</div><div class="module-desc">Track what you’re discovering and building.</div></div>
+        <div class="module-card"><div class="module-name">Goals</div><div class="module-desc">Direction, progress, and follow-through.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="section section-soft">
+    <div class="public-container">
+      <h2 class="section-title">Pricing that respects your pace</h2>
+      <p class="section-subtitle">
+        Choose simplicity or flexibility—both are designed to help, not pressure.
+      </p>
+
+      <div class="pricing-grid">
+        <div class="pricing-card pricing-highlight">
+          <div class="pricing-title">All-in-One</div>
+          <div class="pricing-sub">Best value • best experience</div>
+          <ul class="pricing-list">
+            <li>All modules included</li>
+            <li>AI reflections & summaries</li>
+            <li>Ongoing improvements</li>
+          </ul>
+          <div class="pricing-note">Add your price here when ready.</div>
+          <div class="pricing-cta">
+            {% if request.user.is_authenticated %}
+              <a class="btn btn-primary" href="{% url 'core:dashboard' %}">Go to app</a>
+            {% else %}
+              <a class="btn btn-primary" href="{% url 'login' %}">Try it free</a>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-title">Modular</div>
+          <div class="pricing-sub">Start small • expand over time</div>
+          <ul class="pricing-list">
+            <li>Use only what you want</li>
+            <li>Add modules as needed</li>
+            <li>AI grows as you connect areas</li>
+          </ul>
+          <div class="pricing-note">Add module pricing here if you choose that model.</div>
+          <div class="pricing-cta">
+            <a class="btn btn-ghost" href="{% url 'core:about' %}">Meet the builder</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="public-container final-cta-inner">
+      <div>
+        <h2 class="final-title">A calm place to reflect, track, and grow.</h2>
+        <div class="final-sub">Start where you are. Build from there.</div>
+      </div>
+
+      <div class="final-actions">
+        {% if request.user.is_authenticated %}
+          <a class="btn btn-primary" href="{% url 'core:dashboard' %}">Go to your dashboard</a>
+        {% else %}
+          <a class="btn btn-primary" href="{% url 'login' %}">Try it free</a>
+          <a class="btn btn-ghost" href="{% url 'core:about' %}">About</a>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endblock %}
