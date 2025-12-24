@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Stories | Faith{% endblock %}
+
+{% block content %}
+
+<div class="card">
+  <h1>Stories We Think Everyone Knows</h1>
+  <p class="muted">
+    In churches and small groups, phrases like “everyone knows this story” are common.
+    But not everyone does—and that’s okay.
+  </p>
+  <p class="muted">
+    These stories are told plainly, without assumption, and always grounded in Scripture.
+  </p>
+</div>
+
+<div class="card" style="margin-top:16px;">
+  <form method="get" style="max-width:520px; margin:0 auto;">
+    <label class="muted" for="story-search">Search stories</label>
+
+    <input
+      id="story-search"
+      type="text"
+      name="q"
+      value="{{ query }}"
+      placeholder="Search by story, person, situation, or theme…"
+      style="
+        width: 100%;
+        padding: 14px 16px;
+        margin-top: 8px;
+        border-radius: 10px;
+        border: 1px solid #d1d5db;
+        font-size: 16px;
+        background: #fafafa;
+      "
+    >
+  </form>
+
+  {% if query %}
+    <p class="muted" style="margin-top:12px; text-align:center;">
+      Showing results for “<strong>{{ query }}</strong>”
+    </p>
+  {% endif %}
+</div>
+
+
+<div class="card" style="margin-top:16px; background: linear-gradient(180deg, rgba(99,102,241,0.06), rgba(99,102,241,0.02));">
+  <h2>When someone says “everyone knows this…”</h2>
+  <p class="muted">
+    Healthy faith communities make room for learning, questions, and clarity.
+    Here are gracious ways to engage:
+  </p>
+  <ul>
+    {% for tip in tips %}
+      <li style="margin:10px 0;">{{ tip }}</li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% if stories %}
+  <div class="story-grid">
+    {% for s in stories %}
+      <div class="card story-tile">
+        <h2>{{ s.title }}</h2>
+
+        <p class="story-preview">
+          {{ s.story|truncatechars:220 }}
+        </p>
+
+        <p style="margin-top:10px;">
+          <a href="{% url 'faith:story_detail' s.slug %}" class="muted">
+            Read full story →
+          </a>
+        </p>
+
+
+        <div class="story-why">
+          <p class="muted">
+            <strong>Why this matters:</strong> {{ s.why_it_matters }}
+          </p>
+        </div>
+
+        <div class="story-scripture">
+          <span class="muted" style="font-weight:600;">Scripture:</span>
+          {% for r in s.reference_links %}
+            <a class="muted" href="{{ r.url }}">
+              {{ r.label }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+
+  <div class="card" style="margin-top:20px;">
+    <p class="muted">
+      No stories matched your search. Try a different word or phrase.
+    </p>
+  </div>
+{% endif %}
+
+{% endblock %}

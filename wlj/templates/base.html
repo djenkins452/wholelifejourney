@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
   <link rel="stylesheet" href="{% static 'css/profile.css' %}">
   <link rel="stylesheet" href="{% static 'css/journal.css' %}">
+  <link rel="stylesheet" href="{% static 'css/faith.css' %}">
+
 
   {% if request.user.is_authenticated %}
     {{ enabled_module_keys|json_script:"enabled-modules" }}

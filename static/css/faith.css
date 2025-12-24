@@ -1,0 +1,56 @@
+/* ======================================================
+   Faith App — Styles
+   ====================================================== */
+
+/* ----------------------------------------
+   Story Grid
+---------------------------------------- */
+
+.story-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 20px;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .story-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Phone */
+@media (max-width: 640px) {
+  .story-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ----------------------------------------
+   Story Tiles
+---------------------------------------- */
+
+.story-tile h2 {
+  margin-top: 0;
+}
+
+.story-preview {
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+.story-why {
+  margin-top: 14px;
+  padding-left: 12px;
+  border-left: 3px solid rgba(99,102,241,0.35);
+}
+
+.story-scripture {
+  margin-top: 12px;
+}
+
+.story-scripture a {
+  margin-right: 10px;
+  text-decoration: underline;
+}

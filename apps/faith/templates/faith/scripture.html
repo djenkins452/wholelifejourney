@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Scripture Lookup | Faith{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <h1>Scripture Lookup</h1>
+    <p class="muted">Look up a passage by reference. Choose a translation and enter Book + Chapter + Verse range.</p>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <form method="get">
+      <div style="display:grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap:12px;">
+        <div style="grid-column: span 2;">
+          <label class="muted">Translation</label>
+          <select name="t" style="width:100%; padding:10px;">
+            {% for t in translations %}
+              <option value="{{ t.id }}" {% if t.id == selected_translation %}selected{% endif %}>
+                {{ t.english_name|default:t.name }} ({{ t.id }})
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div style="grid-column: span 2;">
+          <label class="muted">Book (ID)</label>
+          <input name="b" value="{{ book_id }}" placeholder="GEN, PSA, MAT..." style="width:100%; padding:10px;">
+        </div>
+
+        <div>
+          <label class="muted">Chapter</label>
+          <input name="c" value="{{ chapter }}" type="number" min="1" style="width:100%; padding:10px;">
+        </div>
+
+        <div>
+          <label class="muted">Verse range</label>
+          <input name="v" value="{{ verse_range }}" placeholder="1-5" style="width:100%; padding:10px;">
+        </div>
+      </div>
+
+      <div style="margin-top:12px;">
+        <button class="btn btn-primary" type="submit">Lookup</button>
+      </div>
+    </form>
+  </div>
+
+  {% if passage %}
+    <div class="card" style="margin-top:16px;">
+      <h2>{{ passage_title }}</h2>
+      <p class="muted">{{ selected_translation }}</p>
+      {% for v in passage.verses %}
+        <p style="line-height:1.6; margin:10px 0;">
+          <strong>{{ v.number }}</strong> {{ v.text }}
+        </p>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endblock %}
